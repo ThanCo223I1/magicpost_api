@@ -19,4 +19,6 @@ public class Leader {
     private String address;
     @ManyToOne
     private Account account;
+    @ManyToOne
+    private Role role;
 }
