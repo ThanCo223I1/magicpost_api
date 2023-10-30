@@ -22,6 +22,4 @@ public class Employee {
     private String idCard;
     @OneToOne
     private Account account;
-    @ManyToOne
-    private Status status;
 }
