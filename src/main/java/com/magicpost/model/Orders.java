@@ -30,7 +30,9 @@ public class Orders {
     private TransactionPoint transactionPoint;
     @OneToOne
     private ConsolidationPoint consolidationPoint;
-    @OneToOne
+    @ManyToOne
     private Status status;
+    @ManyToOne
+    private Status statusMagicPost;
 
 }
