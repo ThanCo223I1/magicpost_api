@@ -22,5 +22,4 @@ public class EmployeeDTO {
     private String email;
     private String avatar;
     private String idCard;
-    private Status status;
 }

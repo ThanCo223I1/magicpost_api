@@ -14,13 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin("*")
 @RequestMapping("/account/leader")
 public class LeaderAccount {
-    ILeader ileader;
+    private final ILeader ileader;
 
     public LeaderAccount(ILeader leader) {
         this.ileader = leader;
     }
+
     @PostMapping("create")
-    public ResponseEntity<Leader> create(Leader leader , Account account){
-        return ResponseEntity.ok(ileader.create(account,leader));
+    public ResponseEntity<Leader> create(Leader leader, Account account) {
+        return ResponseEntity.ok(ileader.create(account, leader));
     }
 }

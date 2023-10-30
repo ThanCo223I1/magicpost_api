@@ -52,7 +52,7 @@ public class TransactionImpl implements ITransactionPoint {
         transactionPoint.setLeader(leader);
         transactionPoint.setConsolidationPoint(createTransactionRequest.getConsolidationPoint());
         iTransactionPointRepo.save(transactionPoint);
-        return transactionPoint.transactionPointDTO();
+        return transactionPoint.noEmployeeTransactionPointDTO();
     }
 
 

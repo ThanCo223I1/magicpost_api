@@ -1,11 +1,14 @@
 package com.magicpost.model;
 
+import com.magicpost.model.dto.EmployeeDTO;
 import com.magicpost.model.dto.TransactionPointDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -19,12 +22,20 @@ public class TransactionPoint {
     private String address;
     @OneToOne
     private Leader leader;
-    @ManyToOne
-    private Employee employee;
+    @OneToMany
+    private List<Employee> employee;
     @ManyToOne
     private ConsolidationPoint consolidationPoint;
     public TransactionPointDTO transactionPointDTO(){
+        List<EmployeeDTO> employeeDTOS = new ArrayList<>();
+        for (Employee e:this.employee) {
+            employeeDTOS.add(e.employeeDTO());
+        }
         return new TransactionPointDTO(this.id,this.name,this.address,this.leader.leaderDTO()
-                ,this.employee.employeeDTO(),this.consolidationPoint.consolidationPointDTO());
+                ,employeeDTOS,this.consolidationPoint.consolidationPointDTO());
+    }
+    public TransactionPointDTO noEmployeeTransactionPointDTO(){
+        return new TransactionPointDTO(this.id,this.name,this.address,this.leader.leaderDTO()
+                ,this.consolidationPoint.consolidationPointDTO());
     }
 }

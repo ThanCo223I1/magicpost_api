@@ -18,4 +18,20 @@ public class ConsolidationPointDTO {
     private long id;
     private String name;
     private String address;
+    private LeaderDTO leader;
+    private EmployeeDTO employee;
+
+    public ConsolidationPointDTO(long id, String name, String address) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+    }
+
+    public ConsolidationPointDTO(long id, String name, String address, LeaderDTO leader) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.leader = leader;
+    }
 }
+

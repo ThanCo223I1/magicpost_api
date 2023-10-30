@@ -23,9 +23,7 @@ public class Employee {
     private String idCard;
     @OneToOne
     private Account account;
-    @ManyToOne
-    private Status status;
     public EmployeeDTO employeeDTO (){
-        return new EmployeeDTO(this.id,this.name,this.phoneNumber,this.address,this.email,this.avatar,this.idCard, this.status);
+        return new EmployeeDTO(this.id,this.name,this.phoneNumber,this.address,this.email,this.avatar,this.idCard);
     }
 }

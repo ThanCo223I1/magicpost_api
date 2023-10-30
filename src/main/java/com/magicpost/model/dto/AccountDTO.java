@@ -18,5 +18,4 @@ public class AccountDTO {
     private String username;
     private Role role;
     private Status status;
-
 }

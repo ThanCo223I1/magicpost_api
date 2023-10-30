@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -19,9 +20,12 @@ public class ConsolidationPoint {
     private String address;
     @OneToOne
     private Leader leader;
-    @ManyToOne
-    private Employee employee;
+    @OneToMany
+    private List<Employee> employee;
     public ConsolidationPointDTO consolidationPointDTO(){
         return new ConsolidationPointDTO(this.id,this.name,this.address);
+    }
+    public ConsolidationPointDTO consolidationPointDTOLeader(){
+        return new ConsolidationPointDTO(this.id,this.name,this.address,this.leader.leaderDTO());
     }
 }
