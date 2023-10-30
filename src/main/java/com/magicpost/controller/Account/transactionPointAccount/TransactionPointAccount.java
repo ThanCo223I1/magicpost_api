@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/account/leader/transaction")
+@RequestMapping("/account/transaction")
 public class TransactionPointAccount {
     private final ITransactionPoint iTransactionPoint;
 

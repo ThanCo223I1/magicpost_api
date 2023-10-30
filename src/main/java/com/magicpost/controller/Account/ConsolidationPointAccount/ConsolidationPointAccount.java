@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/account/leader/consolidation")
+@RequestMapping("/account/consolidation")
 public class ConsolidationPointAccount {
     private final IConsolidationPoint iConsolidationPoint;
 

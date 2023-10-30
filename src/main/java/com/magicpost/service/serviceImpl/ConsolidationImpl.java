@@ -46,4 +46,14 @@ public class ConsolidationImpl implements IConsolidationPoint {
         iConsolidationPointRepo.save(consolidationPoint);
         return consolidationPoint.consolidationPointDTOLeader();
     }
+
+    @Override
+    public ConsolidationPoint findById(long id) {
+        return iConsolidationPointRepo.findById(id).get();
+    }
+
+    @Override
+    public ConsolidationPoint save(ConsolidationPoint consolidationPoint) {
+        return iConsolidationPointRepo.save(consolidationPoint);
+    }
 }
