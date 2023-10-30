@@ -1,5 +1,6 @@
 package com.magicpost.model;
 
+import com.magicpost.model.dto.EmployeeDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,4 +25,7 @@ public class Employee {
     private Account account;
     @ManyToOne
     private Status status;
+    public EmployeeDTO employeeDTO (){
+        return new EmployeeDTO(this.id,this.name,this.phoneNumber,this.address,this.email,this.avatar,this.idCard, this.status);
+    }
 }

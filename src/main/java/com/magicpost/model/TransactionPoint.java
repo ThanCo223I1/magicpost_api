@@ -1,5 +1,6 @@
 package com.magicpost.model;
 
+import com.magicpost.model.dto.TransactionPointDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,4 +23,8 @@ public class TransactionPoint {
     private Employee employee;
     @ManyToOne
     private ConsolidationPoint consolidationPoint;
+    public TransactionPointDTO transactionPointDTO(){
+        return new TransactionPointDTO(this.id,this.name,this.address,this.leader.leaderDTO()
+                ,this.employee.employeeDTO(),this.consolidationPoint.consolidationPointDTO());
+    }
 }

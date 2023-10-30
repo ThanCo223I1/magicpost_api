@@ -1,5 +1,6 @@
 package com.magicpost.model;
 
+import com.magicpost.model.dto.LeaderDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,9 +17,11 @@ public class Leader {
     private long id;
     private String name;
     private String phoneNumber;
-    private String address;
     @ManyToOne
     private Account account;
     @ManyToOne
     private Role role;
+    public LeaderDTO leaderDTO(){
+        return new LeaderDTO(this.id,this.name,this.phoneNumber,this.role);
+    }
 }

@@ -1,5 +1,6 @@
 package com.magicpost.controller.Account.leaderAccount;
 
+import com.magicpost.model.Account;
 import com.magicpost.model.Leader;
 import com.magicpost.model.dto.AccountDTO;
 import com.magicpost.service.ILeader;
@@ -13,13 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin("*")
 @RequestMapping("/account/leader")
 public class LeaderAccount {
-    ILeader leader;
+    ILeader ileader;
 
     public LeaderAccount(ILeader leader) {
-        this.leader = leader;
+        this.ileader = leader;
     }
     @PostMapping("create")
-    public ResponseEntity<Leader> create(Leader leader , AccountDTO accountDTO){
-        return null;
+    public ResponseEntity<Leader> create(Leader leader , Account account){
+        return ResponseEntity.ok(ileader.create(account,leader));
     }
 }

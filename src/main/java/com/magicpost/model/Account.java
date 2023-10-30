@@ -1,5 +1,6 @@
 package com.magicpost.model;
 
+import com.magicpost.model.dto.AccountDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,4 +21,7 @@ public class Account {
     private Role role;
     @ManyToOne
     private Status status;
+    public AccountDTO accountDTO(){
+        return new AccountDTO(this.id,this.username,this.role,this.status);
+    }
 }

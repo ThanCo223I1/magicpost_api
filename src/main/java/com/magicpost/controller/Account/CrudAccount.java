@@ -1,6 +1,7 @@
 package com.magicpost.controller.Account;
 
 import com.magicpost.model.Account;
+import com.magicpost.model.dto.AccountDTO;
 import com.magicpost.service.IAccount;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

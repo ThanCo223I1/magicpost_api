@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @Service
 public class AccountImpl implements IAccount {
-    IAccountRepo iAccountRepo;
+   private final IAccountRepo iAccountRepo;
 
     public AccountImpl(IAccountRepo iAccountRepo) {
         this.iAccountRepo=iAccountRepo;
