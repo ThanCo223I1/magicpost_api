@@ -9,7 +9,6 @@ import lombok.Setter;
 
 import javax.persistence.ManyToOne;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
@@ -18,4 +17,20 @@ public class AccountDTO {
     private String username;
     private Role role;
     private Status status;
+    private String token;
+
+    public AccountDTO(long id, String username, Status status, Role role, String token) {
+        this.id = id;
+        this.username = username;
+        this.status = status;
+        this.role = role;
+        this.token = token;
+    }
+
+    public AccountDTO(long id, String username, Role role, Status status) {
+        this.id = id;
+        this.username = username;
+        this.role = role;
+        this.status = status;
+    }
 }

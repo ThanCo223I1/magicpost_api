@@ -57,4 +57,9 @@ public class AccountImpl implements IAccount {
         roles.add((GrantedAuthority) account.getRole());
         return new User(account.getUsername(), account.getPassword(), roles);
     }
+
+    @Override
+    public Account getAccountLogin(String username, String password) {
+        return iAccountRepo.getAccountByUsernameAndPassword(username , password);
+    }
 }
