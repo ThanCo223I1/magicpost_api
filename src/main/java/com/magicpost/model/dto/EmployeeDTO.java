@@ -1,6 +1,7 @@
 package com.magicpost.model.dto;
 
 import com.magicpost.model.Account;
+import com.magicpost.model.Role;
 import com.magicpost.model.Status;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,4 +23,5 @@ public class EmployeeDTO {
     private String email;
     private String avatar;
     private String idCard;
+    private Role role;
 }

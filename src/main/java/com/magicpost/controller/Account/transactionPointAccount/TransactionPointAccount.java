@@ -30,4 +30,9 @@ public class TransactionPointAccount {
         return ResponseEntity.ok(iTransactionPoint.getAll());
 
     }
+    @GetMapping("leader/{id}")
+    public ResponseEntity<TransactionPointDTO> findByLeader_Id(@PathVariable long id){
+        return ResponseEntity.ok(iTransactionPoint.findByLeader_Id(id));
+
+    }
 }

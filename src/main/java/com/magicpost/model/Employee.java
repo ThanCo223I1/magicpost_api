@@ -21,9 +21,11 @@ public class Employee {
     private String email;
     private String avatar;
     private String idCard;
+    @ManyToOne
+    private Role role;
     @OneToOne
     private Account account;
     public EmployeeDTO employeeDTO (){
-        return new EmployeeDTO(this.id,this.name,this.phoneNumber,this.address,this.email,this.avatar,this.idCard);
+        return new EmployeeDTO(this.id,this.name,this.phoneNumber,this.address,this.email,this.avatar,this.idCard,this.role);
     }
 }

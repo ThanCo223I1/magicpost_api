@@ -4,10 +4,7 @@ import com.magicpost.model.dto.CreateEmployeeRequest;
 import com.magicpost.model.dto.EmployeeDTO;
 import com.magicpost.service.IEmployee;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin("*")
@@ -20,11 +17,11 @@ public class EmployeeAccount {
     }
 
     @PostMapping("createTran")
-    public ResponseEntity<EmployeeDTO> createEmployeeTransaction(CreateEmployeeRequest createEmployeeRequest) {
+    public ResponseEntity<EmployeeDTO> createEmployeeTransaction(@RequestBody CreateEmployeeRequest createEmployeeRequest) {
         return ResponseEntity.ok(iEmployee.createEmployeeTransaction(createEmployeeRequest));
     }
     @PostMapping("createCon")
-    public ResponseEntity<EmployeeDTO> createEmployeeConsolidation(CreateEmployeeRequest createEmployeeRequest) {
+    public ResponseEntity<EmployeeDTO> createEmployeeConsolidation(@RequestBody CreateEmployeeRequest createEmployeeRequest) {
         return ResponseEntity.ok(iEmployee.createEmployeeConsolidation(createEmployeeRequest));
     }
 

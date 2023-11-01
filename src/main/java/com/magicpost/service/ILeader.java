@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface ILeader {
     Leader create (Account account , Leader leader);
+    Leader findByAccount_Id(long id);
 }

@@ -32,10 +32,11 @@ public class EmployeeImpl implements IEmployee {
         Account account = createEmployeeRequest.getAccount();
         Employee employee = createEmployeeRequest.getEmployee();
         employee.setAccount(iAccount.create(account));
+        employee = iEmployeeRepo.save(employee);
         TransactionPoint transactionPoint = iTransactionPoint.findById(createEmployeeRequest.getId()).get();
         transactionPoint.getEmployee().add(employee);
         iTransactionPoint.edit(transactionPoint);
-        return iEmployeeRepo.save(employee).employeeDTO();
+        return employee.employeeDTO();
     }
 
     @Override
@@ -43,9 +44,15 @@ public class EmployeeImpl implements IEmployee {
         Account account = createEmployeeRequest.getAccount();
         Employee employee = createEmployeeRequest.getEmployee();
         employee.setAccount(iAccount.create(account));
+        employee = iEmployeeRepo.save(employee);
         ConsolidationPoint consolidationPoint = iConsolidationPoint.findById(createEmployeeRequest.getId());
         consolidationPoint.getEmployee().add(employee);
         iConsolidationPoint.save(consolidationPoint);
-        return iEmployeeRepo.save(employee).employeeDTO();
+        return employee.employeeDTO();
+    }
+
+    @Override
+    public Employee findByAccount_Id(long id) {
+        return iEmployeeRepo.findAllByAccount_Id(id);
     }
 }

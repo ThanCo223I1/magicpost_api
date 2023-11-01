@@ -2,6 +2,7 @@ package com.magicpost.controller.Account.ConsolidationPointAccount;
 
 import com.magicpost.model.dto.ConsolidationPointDTO;
 import com.magicpost.model.dto.CreateConsolidationRequest;
+import com.magicpost.model.dto.TransactionPointDTO;
 import com.magicpost.service.IConsolidationPoint;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,5 +25,10 @@ public class ConsolidationPointAccount {
     @PostMapping("create")
     public ResponseEntity<ConsolidationPointDTO> create(@RequestBody CreateConsolidationRequest createConsolidationRequest){
         return ResponseEntity.ok(iConsolidationPoint.create(createConsolidationRequest));
+    }
+    @GetMapping("leader/{id}")
+    public ResponseEntity<ConsolidationPointDTO> findByLeader_Id(@PathVariable long id){
+        return ResponseEntity.ok(iConsolidationPoint.findByLeader_Id(id));
+
     }
 }
