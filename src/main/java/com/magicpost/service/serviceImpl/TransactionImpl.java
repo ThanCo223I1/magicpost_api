@@ -60,4 +60,9 @@ public class TransactionImpl implements ITransactionPoint {
     public TransactionPoint edit(TransactionPoint transactionPoint) {
         return iTransactionPointRepo.save(transactionPoint);
     }
+
+    @Override
+    public TransactionPointDTO findByLeader_Id(long id) {
+        return iTransactionPointRepo.findByLeader_Id(id).transactionPointDTO();
+    }
 }

@@ -20,4 +20,9 @@ public class LeaderImpl implements ILeader {
         leader.setAccount(account);
         return leaderRepo.save(leader);
     }
+
+    @Override
+    public Leader findByAccount_Id(long id) {
+        return leaderRepo.findAllByAccount_Id(id);
+    }
 }
