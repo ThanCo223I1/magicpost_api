@@ -27,15 +27,11 @@ public class Orders {
     private String width;
     private String height;
     private double weight;
-    @ManyToOne
-    private Employee employee;
     @OneToOne
     private TransactionPoint transactionPoint;
     @OneToOne
     private ConsolidationPoint consolidationPoint;
     @ManyToOne
-    private Status status;
-    @ManyToOne
-    private Status statusMagicPost;
+    private Status status=new Status(5,"Pending");
 
 }

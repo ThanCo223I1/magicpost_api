@@ -17,4 +17,6 @@ public interface ITransactionPoint {
 
     TransactionPoint edit(TransactionPoint transactionPoint);
     TransactionPointDTO findByLeader_Id(long id);
+
+    long findIdTransactionByIdEmployee(long idEmployee);
 }

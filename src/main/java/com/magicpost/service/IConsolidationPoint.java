@@ -12,4 +12,6 @@ public interface IConsolidationPoint {
     ConsolidationPoint findById(long id);
     ConsolidationPoint save(ConsolidationPoint consolidationPoint);
     ConsolidationPointDTO  findByLeader_Id(long id);
+
+    long findIdConsolidationByEmployee(long idEmployee);
 }

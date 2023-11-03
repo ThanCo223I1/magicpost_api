@@ -61,4 +61,9 @@ public class ConsolidationImpl implements IConsolidationPoint {
     public ConsolidationPointDTO findByLeader_Id(long id) {
         return iConsolidationPointRepo.findByLeader_Id(id).consolidationPointDTO();
     }
+
+    @Override
+    public long findIdConsolidationByEmployee(long idEmployee) {
+        return iConsolidationPointRepo.findIdConsolidationByIdEmployee(idEmployee);
+    }
 }
