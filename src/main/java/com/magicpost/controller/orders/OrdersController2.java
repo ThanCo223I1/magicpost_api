@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/orders")
-public class OrdersController {
+public class OrdersController2 {
     @Autowired
     IAccount iAccount;
     @Autowired

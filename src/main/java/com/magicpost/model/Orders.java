@@ -16,6 +16,7 @@ public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    private String image;
     private Date createOrder;
     private String nameSender;
     private String nameReceiver;
@@ -23,6 +24,8 @@ public class Orders {
     private String phoneReceiver;
     private String addressSender;
     private String addressReceiver;
+    private String width;
+    private String height;
     private double weight;
     @OneToOne
     private TransactionPoint transactionPoint;

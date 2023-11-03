@@ -4,6 +4,8 @@ import com.magicpost.model.Account;
 import com.magicpost.model.Leader;
 import com.magicpost.model.TransactionPoint;
 import com.magicpost.model.dto.CreateTransactionRequest;
+import com.magicpost.model.dto.EditDTO;
+import com.magicpost.model.dto.EditLeaderPoint;
 import com.magicpost.model.dto.TransactionPointDTO;
 import com.magicpost.repo.ITransactionPointRepo;
 import com.magicpost.service.IAccount;
@@ -28,13 +30,13 @@ public class TransactionImpl implements ITransactionPoint {
     }
 
     @Override
-    public List<TransactionPointDTO> getAll() {
+    public List<TransactionPointDTO> findAllByStatus(int status) {
         List<TransactionPointDTO> transactionPointDTOList = new ArrayList<>();
-        List<TransactionPoint> transactionPointList = iTransactionPointRepo.findAll();
-        for (TransactionPoint t: transactionPointList) {
+        List<TransactionPoint> transactionPointList = iTransactionPointRepo.findAllByStatus(status);
+        for (TransactionPoint t : transactionPointList) {
             transactionPointDTOList.add(t.transactionPointDTO());
         }
-        return transactionPointDTOList ;
+        return transactionPointDTOList;
     }
 
     @Override
@@ -59,5 +61,48 @@ public class TransactionImpl implements ITransactionPoint {
     @Override
     public TransactionPoint edit(TransactionPoint transactionPoint) {
         return iTransactionPointRepo.save(transactionPoint);
+    }
+
+    @Override
+    public TransactionPointDTO findByLeader_Id(long id) {
+        return iTransactionPointRepo.findByLeader_Id(id).transactionPointDTO();
+    }
+
+    @Override
+    public TransactionPointDTO save(EditDTO editDTO) {
+        Account account = iAccount.findById(editDTO.getIdAccount()).get();
+        if (account.getPassword().equals(editDTO.getPassword())) {
+            TransactionPoint transactionPoint = iTransactionPointRepo.findById(editDTO.getId()).get();
+            transactionPoint.setName(editDTO.getName());
+            return iTransactionPointRepo.save(transactionPoint).transactionPointDTO();
+        }
+        return null;
+    }
+
+    @Override
+    public TransactionPointDTO saveStatus(long id, int status) {
+        TransactionPoint transactionPoint = iTransactionPointRepo.findById(id).get();
+        transactionPoint.setStatus(status);
+        return iTransactionPointRepo.save(transactionPoint).transactionPointDTO();
+    }
+
+    @Override
+    public Object saveLeader(EditLeaderPoint editLeaderPoint) {
+        Account account = iAccount.findById(editLeaderPoint.getIdAccount()).get();
+        if (account.getPassword().equals(editLeaderPoint.getPassword())) {
+            Account newAccount;
+            try {
+               newAccount = iAccount.create(editLeaderPoint.getAccount());
+                Leader leader = editLeaderPoint.getLeader();
+                leader = iLeader.create(newAccount, leader);
+                TransactionPoint transactionPoint = iTransactionPointRepo.findById(editLeaderPoint.getId()).get();
+                transactionPoint.setLeader(leader);
+                return iTransactionPointRepo.save(transactionPoint).transactionPointDTO();
+            }catch (Exception e){
+                return "account already exists";
+            }
+
+        }
+        return null;
     }
 }

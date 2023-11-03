@@ -5,7 +5,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
 public interface ITransactionPointRepo extends JpaRepository<TransactionPoint , Long> {
+    TransactionPoint findByLeader_Id(long id);
+    List<TransactionPoint> findAllByStatus(int status);
     @Query(nativeQuery = true, value = "SELECT distinct tp.* " +
             "FROM transaction_point tp " +
             "JOIN transaction_point_employee tpe ON tpe.transaction_point_id = tp.id " +

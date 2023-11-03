@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface IAccountRepo extends JpaRepository<Account , Long> {
     Account getAccountByUsername(String username);
-//    @Query("SELECT AccountDTO(a.id, a.username, a.role) FROM Account a")
-//    List<AccountDTO> findAllAccountDTOs();
+    Account getAccountByUsernameAndPassword(String username , String password);
+
 }

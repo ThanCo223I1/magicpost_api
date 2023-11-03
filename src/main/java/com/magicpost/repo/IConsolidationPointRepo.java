@@ -7,7 +7,12 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
+import java.util.List;
+
 public interface IConsolidationPointRepo extends JpaRepository<ConsolidationPoint , Long> {
+    ConsolidationPoint findByLeader_Id(long id);
+    List<ConsolidationPoint> findAllByStatus(int status);
+
     @Query(nativeQuery = true, value = "SELECT distinct cp.*" +
             "FROM consolidation_point cp " +
             "JOIN consolidation_point_employee cpe ON cpe.consolidation_point_id = cp.id " +

@@ -17,4 +17,6 @@ public interface IAccount extends UserDetailsService {
     Optional<Account> findById(long idAccount);
     Account findAccountById(long id);
     UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
+    Account getAccountLogin(String username, String password);
+
 }
