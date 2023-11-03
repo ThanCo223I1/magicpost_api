@@ -33,10 +33,10 @@ public class TransactionPoint {
             employeeDTOS.add(e.employeeDTO());
         }
         return new TransactionPointDTO(this.id,this.name,this.address,this.leader.leaderDTO()
-                ,employeeDTOS,this.consolidationPoint.consolidationPointDTO(),this.status);
+                ,employeeDTOS,this.consolidationPoint.noEmployeeConsolidationPointDTO(),this.status);
     }
     public TransactionPointDTO noEmployeeTransactionPointDTO(){
         return new TransactionPointDTO(this.id,this.name,this.address,this.leader.leaderDTO()
-                ,this.consolidationPoint.consolidationPointDTO());
+                ,this.consolidationPoint.noEmployeeConsolidationPointDTO());
     }
 }

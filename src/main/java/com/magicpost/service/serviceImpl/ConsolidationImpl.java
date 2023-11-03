@@ -59,13 +59,13 @@ public class ConsolidationImpl implements IConsolidationPoint {
 
     @Override
     public ConsolidationPointDTO findByLeader_Id(long id) {
-        return iConsolidationPointRepo.findByLeader_Id(id).consolidationPointDTO();
+        return iConsolidationPointRepo.findByLeader_Id(id).noEmployeeConsolidationPointDTO();
     }
     @Override
     public ConsolidationPointDTO saveStatus(long id, int status) {
         ConsolidationPoint consolidationPoint = iConsolidationPointRepo.findById(id).get();
         consolidationPoint.setStatus(status);
-        return iConsolidationPointRepo.save(consolidationPoint).consolidationPointDTO();
+        return iConsolidationPointRepo.save(consolidationPoint).noEmployeeConsolidationPointDTO();
     }
     @Override
     public Object saveLeader(EditLeaderPoint editLeaderPoint) {
@@ -78,7 +78,7 @@ public class ConsolidationImpl implements IConsolidationPoint {
                 leader = iLeader.create(newAccount, leader);
                 ConsolidationPoint consolidationPoint = iConsolidationPointRepo.findById(editLeaderPoint.getId()).get();
                 consolidationPoint.setLeader(leader);
-                return iConsolidationPointRepo.save(consolidationPoint).consolidationPointDTO();
+                return iConsolidationPointRepo.save(consolidationPoint).noEmployeeConsolidationPointDTO();
             }catch (Exception e){
                 return "account already exists";
             }

@@ -28,27 +28,36 @@ public class EmployeeImpl implements IEmployee {
     }
 
     @Override
-    public EmployeeDTO createEmployeeTransaction(CreateEmployeeRequest createEmployeeRequest) {
-        Account account = createEmployeeRequest.getAccount();
-        Employee employee = createEmployeeRequest.getEmployee();
-        employee.setAccount(iAccount.create(account));
-        employee = iEmployeeRepo.save(employee);
-        TransactionPoint transactionPoint = iTransactionPoint.findById(createEmployeeRequest.getId()).get();
-        transactionPoint.getEmployee().add(employee);
-        iTransactionPoint.edit(transactionPoint);
-        return employee.employeeDTO();
+    public Object createEmployeeTransaction(CreateEmployeeRequest createEmployeeRequest) {
+        try {
+            Account account = createEmployeeRequest.getAccount();
+            Employee employee = createEmployeeRequest.getEmployee();
+            employee.setAccount(iAccount.create(account));
+            employee = iEmployeeRepo.save(employee);
+            TransactionPoint transactionPoint = iTransactionPoint.findById(createEmployeeRequest.getId()).get();
+            transactionPoint.getEmployee().add(employee);
+            iTransactionPoint.edit(transactionPoint);
+            return employee.employeeDTO();
+        } catch (Exception e) {
+            return "account already exists";
+        }
+
     }
 
     @Override
-    public EmployeeDTO createEmployeeConsolidation(CreateEmployeeRequest createEmployeeRequest) {
-        Account account = createEmployeeRequest.getAccount();
-        Employee employee = createEmployeeRequest.getEmployee();
-        employee.setAccount(iAccount.create(account));
-        employee = iEmployeeRepo.save(employee);
-        ConsolidationPoint consolidationPoint = iConsolidationPoint.findById(createEmployeeRequest.getId());
-        consolidationPoint.getEmployee().add(employee);
-        iConsolidationPoint.save(consolidationPoint);
-        return employee.employeeDTO();
+    public Object createEmployeeConsolidation(CreateEmployeeRequest createEmployeeRequest) {
+        try {
+            Account account = createEmployeeRequest.getAccount();
+            Employee employee = createEmployeeRequest.getEmployee();
+            employee.setAccount(iAccount.create(account));
+            employee = iEmployeeRepo.save(employee);
+            ConsolidationPoint consolidationPoint = iConsolidationPoint.findById(createEmployeeRequest.getId());
+            consolidationPoint.getEmployee().add(employee);
+            iConsolidationPoint.save(consolidationPoint);
+            return employee.employeeDTO();
+        } catch (Exception e) {
+            return "account already exists";
+        }
     }
 
     @Override

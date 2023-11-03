@@ -25,7 +25,7 @@ public class ConsolidationPoint {
     @OneToMany
     private List<Employee> employee;
     private int status;
-    public ConsolidationPointDTO consolidationPointDTO(){
+    public ConsolidationPointDTO noEmployeeConsolidationPointDTO(){
         return new ConsolidationPointDTO(this.id,this.name,this.address,this.status);
     }
     public ConsolidationPointDTO consolidationPointDTOLeader(){

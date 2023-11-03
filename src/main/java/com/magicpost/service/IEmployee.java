@@ -8,7 +8,7 @@ import com.magicpost.model.dto.EmployeeDTO;
 import java.util.List;
 
 public interface IEmployee {
-    EmployeeDTO createEmployeeTransaction(CreateEmployeeRequest createEmployeeRequest);
-    EmployeeDTO createEmployeeConsolidation(CreateEmployeeRequest createEmployeeRequest);
+    Object createEmployeeTransaction(CreateEmployeeRequest createEmployeeRequest);
+    Object createEmployeeConsolidation(CreateEmployeeRequest createEmployeeRequest);
     Employee  findByAccount_Id(long id);
 }

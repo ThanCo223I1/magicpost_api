@@ -1,5 +1,6 @@
 package com.magicpost.model;
 
+import com.magicpost.model.dto.OrdersDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -37,5 +38,11 @@ public class Orders {
     private Status status;
     @ManyToOne
     private Status statusMagicPost;
+
+    public OrdersDTO orderDTO() {
+        return new OrdersDTO(this.id, this.image, this.createOrder, this.nameSender, this.nameReceiver, this.phoneSender, this.phoneReceiver,
+                this.addressSender, this.addressReceiver, this.width, this.height, this.weight, this.employee.employeeDTO(),
+                this.transactionPoint.noEmployeeTransactionPointDTO(), this.consolidationPoint.noEmployeeConsolidationPointDTO(), this.status, this.statusMagicPost);
+    }
 
 }

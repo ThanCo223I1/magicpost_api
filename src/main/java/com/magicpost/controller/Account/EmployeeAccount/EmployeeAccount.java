@@ -17,12 +17,20 @@ public class EmployeeAccount {
     }
 
     @PostMapping("createTran")
-    public ResponseEntity<EmployeeDTO> createEmployeeTransaction(@RequestBody CreateEmployeeRequest createEmployeeRequest) {
-        return ResponseEntity.ok(iEmployee.createEmployeeTransaction(createEmployeeRequest));
-    }
-    @PostMapping("createCon")
-    public ResponseEntity<EmployeeDTO> createEmployeeConsolidation(@RequestBody CreateEmployeeRequest createEmployeeRequest) {
-        return ResponseEntity.ok(iEmployee.createEmployeeConsolidation(createEmployeeRequest));
+    public ResponseEntity<?> createEmployeeTransaction(@RequestBody CreateEmployeeRequest createEmployeeRequest) {
+        Object o = iEmployee.createEmployeeTransaction(createEmployeeRequest);
+        if (o.equals("account already exists")) {
+            return ResponseEntity.ok("account already exists");
+        }
+        return ResponseEntity.ok((EmployeeDTO) o);
     }
 
+    @PostMapping("createCon")
+    public ResponseEntity<?> createEmployeeConsolidation(@RequestBody CreateEmployeeRequest createEmployeeRequest) {
+        Object o = iEmployee.createEmployeeConsolidation(createEmployeeRequest);
+        if (o.equals("account already exists")) {
+            return ResponseEntity.ok("account already exists");
+        }
+        return ResponseEntity.ok((EmployeeDTO) o);
+    }
 }
