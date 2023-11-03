@@ -26,13 +26,14 @@ public class TransactionPoint {
     private List<Employee> employee;
     @ManyToOne
     private ConsolidationPoint consolidationPoint;
+    private int status;
     public TransactionPointDTO transactionPointDTO(){
         List<EmployeeDTO> employeeDTOS = new ArrayList<>();
         for (Employee e:this.employee) {
             employeeDTOS.add(e.employeeDTO());
         }
         return new TransactionPointDTO(this.id,this.name,this.address,this.leader.leaderDTO()
-                ,employeeDTOS,this.consolidationPoint.consolidationPointDTO());
+                ,employeeDTOS,this.consolidationPoint.consolidationPointDTO(),this.status);
     }
     public TransactionPointDTO noEmployeeTransactionPointDTO(){
         return new TransactionPointDTO(this.id,this.name,this.address,this.leader.leaderDTO()

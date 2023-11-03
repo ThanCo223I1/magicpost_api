@@ -9,8 +9,8 @@ import lombok.Setter;
 
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import java.util.List;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
@@ -19,12 +19,23 @@ public class ConsolidationPointDTO {
     private String name;
     private String address;
     private LeaderDTO leader;
-    private EmployeeDTO employee;
+    private List<EmployeeDTO> employee;
+    private int status;
 
-    public ConsolidationPointDTO(long id, String name, String address) {
+    public ConsolidationPointDTO(long id, String name, String address, LeaderDTO leader, List<EmployeeDTO> employee, int status) {
         this.id = id;
         this.name = name;
         this.address = address;
+        this.leader = leader;
+        this.employee = employee;
+        this.status = status;
+    }
+
+    public ConsolidationPointDTO(long id, String name, String address, int status) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.status=status;
     }
 
     public ConsolidationPointDTO(long id, String name, String address, LeaderDTO leader) {
