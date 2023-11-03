@@ -101,4 +101,15 @@ public class ConsolidationImpl implements IConsolidationPoint {
         }
         return null;
     }
+
+    @Override
+    public List<ConsolidationPoint> findAllByNotInAccountId(long accountId) {
+        List<ConsolidationPoint> consolidationPointList = iConsolidationPointRepo.findAllByNotInAccountId(accountId);
+        return consolidationPointList;
+    }
+
+    @Override
+    public ConsolidationPoint findByTransactionPoint_AccountId(long accountId) {
+        return iConsolidationPointRepo.findByTransactionPoint_AccountId(accountId);
+    }
 }

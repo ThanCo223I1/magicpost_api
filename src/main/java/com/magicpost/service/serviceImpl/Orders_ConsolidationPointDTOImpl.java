@@ -1,0 +1,43 @@
+package com.magicpost.service.serviceImpl;
+
+import com.magicpost.model.Account;
+import com.magicpost.model.ConsolidationPoint;
+import com.magicpost.model.Orders;
+import com.magicpost.model.dto.Orders_ConsolidationPointDTO;
+import com.magicpost.repo.IConsolidationPointRepo;
+import com.magicpost.repo.IOrderTypeRepo;
+import com.magicpost.repo.IOrdersRepo;
+import com.magicpost.service.IOrders_ConsolidationPointDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+public class Orders_ConsolidationPointDTOImpl implements IOrders_ConsolidationPointDTO {
+    @Autowired
+    IOrdersRepo iOrdersRepo;
+    @Autowired
+    IOrderTypeRepo iOrderTypeRepo;
+    @Autowired
+    IConsolidationPointRepo iConsolidationPointRepo;
+
+    @Override
+    public List<Orders_ConsolidationPointDTO> findAllOrder_ConsolidationPoint(Account account) {
+        List<Orders_ConsolidationPointDTO> orders_consolidationPointDTOList = new ArrayList<>();
+        ConsolidationPoint consolidationPoint = iConsolidationPointRepo.findConsolidationPointsByAccountId(account.getId());
+        Orders_ConsolidationPointDTO orders_consolidationPointDTO;
+        long count = 0;
+        for (Orders orders : iOrdersRepo.findByConsolidationPointId(consolidationPoint.getId())) {
+            orders_consolidationPointDTO = new Orders_ConsolidationPointDTO(count++, orders, iOrderTypeRepo.findTypesByOrderId(orders.getId()));
+            orders_consolidationPointDTOList.add(orders_consolidationPointDTO);
+        }
+        return orders_consolidationPointDTOList;
+    }
+
+    @Override
+    public void save(Orders orders) {
+        iOrdersRepo.save(orders);
+    }
+}

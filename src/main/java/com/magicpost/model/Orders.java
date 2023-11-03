@@ -33,7 +33,7 @@ public class Orders {
     @OneToOne
     private ConsolidationPoint consolidationPoint;
     @ManyToOne
-    private Status status=new Status(5,"Pending");
+    private Status status;
 
     public OrdersDTO orderDTO() {
         return new OrdersDTO(this.id, this.image, this.createOrder, this.nameSender, this.nameReceiver, this.phoneSender, this.phoneReceiver,
