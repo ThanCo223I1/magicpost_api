@@ -50,6 +50,12 @@ public class AccountImpl implements IAccount {
     public Optional<Account> findById(long idAccount) {
         return iAccountRepo.findById(idAccount);
     }
+
+    @Override
+    public Account findAccountById(long id) {
+        return iAccountRepo.findById(id).get();
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Account account = iAccountRepo.getAccountByUsername(username);

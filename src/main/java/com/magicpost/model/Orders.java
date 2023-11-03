@@ -24,15 +24,11 @@ public class Orders {
     private String addressSender;
     private String addressReceiver;
     private double weight;
-    @ManyToOne
-    private Employee employee;
     @OneToOne
     private TransactionPoint transactionPoint;
     @OneToOne
     private ConsolidationPoint consolidationPoint;
     @ManyToOne
     private Status status;
-    @ManyToOne
-    private Status statusMagicPost;
 
 }

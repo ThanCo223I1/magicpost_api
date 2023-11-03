@@ -15,6 +15,6 @@ public interface IAccount extends UserDetailsService {
     void delete(Account account);
     void delete(long idAccount);
     Optional<Account> findById(long idAccount);
-
+    Account findAccountById(long id);
     UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
 }

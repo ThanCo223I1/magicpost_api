@@ -46,4 +46,15 @@ public class ConsolidationImpl implements IConsolidationPoint {
         iConsolidationPointRepo.save(consolidationPoint);
         return consolidationPoint.consolidationPointDTOLeader();
     }
+
+    @Override
+    public List<ConsolidationPoint> findAllByNotInAccountId(long accountId) {
+        List<ConsolidationPoint> consolidationPointList = iConsolidationPointRepo.findAllByNotInAccountId(accountId);
+        return consolidationPointList;
+    }
+
+    @Override
+    public ConsolidationPoint findByTransactionPoint_AccountId(long accountId) {
+        return iConsolidationPointRepo.findByTransactionPoint_AccountId(accountId);
+    }
 }
