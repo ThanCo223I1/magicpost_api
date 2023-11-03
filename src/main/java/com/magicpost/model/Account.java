@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Data
 @Entity
@@ -15,7 +16,10 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(unique = true)
+    @NotBlank(message = "Username is required")
     private String username;
+    @NotBlank(message = "Password is required")
     private String password;
     @ManyToOne
     private Role role;
