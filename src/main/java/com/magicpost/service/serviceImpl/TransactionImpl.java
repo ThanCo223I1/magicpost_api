@@ -11,6 +11,7 @@ import com.magicpost.repo.ITransactionPointRepo;
 import com.magicpost.service.IAccount;
 import com.magicpost.service.ILeader;
 import com.magicpost.service.ITransactionPoint;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import java.util.Optional;
 
 @Service
 public class TransactionImpl implements ITransactionPoint {
+    @Autowired
     ITransactionPointRepo iTransactionPointRepo;
     IAccount iAccount;
     ILeader iLeader;
@@ -69,6 +71,9 @@ public class TransactionImpl implements ITransactionPoint {
     }
 
     @Override
+    public long findIdTransactionByIdEmployee(long idEmployee) {
+        return iTransactionPointRepo.findIdTransactionByIdEmployee(idEmployee);
+    }
     public TransactionPointDTO save(EditDTO editDTO) {
         Account account = iAccount.findById(editDTO.getIdAccount()).get();
         if (account.getPassword().equals(editDTO.getPassword())) {

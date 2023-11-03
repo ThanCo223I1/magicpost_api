@@ -23,15 +23,13 @@ public class OrdersDTO {
     private String width;
     private String height;
     private double weight;
-    private EmployeeDTO employee;
     private TransactionPointDTO transactionPoint;
     private ConsolidationPointDTO consolidationPoint;
     private Status status;
-    private Status statusMagicPost;
 
     public OrdersDTO(long id, String image, Date createOrder, String nameSender, String nameReceiver, String phoneSender,
-                     String phoneReceiver, String addressSender, String addressReceiver, String width, String height, double weight, EmployeeDTO employee,
-                     TransactionPointDTO transactionPoint, ConsolidationPointDTO consolidationPoint, Status status, Status statusMagicPost) {
+                     String phoneReceiver, String addressSender, String addressReceiver, String width, String height, double weight,
+                     TransactionPointDTO transactionPoint, ConsolidationPointDTO consolidationPoint, Status status) {
         this.id = id;
         this.image = image;
         this.createOrder = createOrder;
@@ -44,10 +42,8 @@ public class OrdersDTO {
         this.width = width;
         this.height = height;
         this.weight = weight;
-        this.employee = employee;
         this.transactionPoint = transactionPoint;
         this.consolidationPoint = consolidationPoint;
         this.status = status;
-        this.statusMagicPost = statusMagicPost;
     }
 }

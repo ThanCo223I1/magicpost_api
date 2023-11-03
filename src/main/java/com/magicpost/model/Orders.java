@@ -28,21 +28,17 @@ public class Orders {
     private String width;
     private String height;
     private double weight;
-    @ManyToOne
-    private Employee employee;
     @OneToOne
     private TransactionPoint transactionPoint;
     @OneToOne
     private ConsolidationPoint consolidationPoint;
     @ManyToOne
-    private Status status;
-    @ManyToOne
-    private Status statusMagicPost;
+    private Status status=new Status(5,"Pending");
 
     public OrdersDTO orderDTO() {
         return new OrdersDTO(this.id, this.image, this.createOrder, this.nameSender, this.nameReceiver, this.phoneSender, this.phoneReceiver,
-                this.addressSender, this.addressReceiver, this.width, this.height, this.weight, this.employee.employeeDTO(),
-                this.transactionPoint.noEmployeeTransactionPointDTO(), this.consolidationPoint.noEmployeeConsolidationPointDTO(), this.status, this.statusMagicPost);
+                this.addressSender, this.addressReceiver, this.width, this.height, this.weight,
+                this.transactionPoint.noEmployeeTransactionPointDTO(), this.consolidationPoint.noEmployeeConsolidationPointDTO(), this.status);
     }
 
 }

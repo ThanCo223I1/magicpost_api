@@ -1,13 +1,12 @@
 package com.magicpost.model;
 
 import com.magicpost.model.dto.AccountDTO;
-import javax.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotBlank;
 
 @Data
 @Entity

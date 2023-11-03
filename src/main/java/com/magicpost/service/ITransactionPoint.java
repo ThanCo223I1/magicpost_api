@@ -19,6 +19,8 @@ public interface ITransactionPoint {
 
     TransactionPoint edit(TransactionPoint transactionPoint);
     TransactionPointDTO findByLeader_Id(long id);
+
+    long findIdTransactionByIdEmployee(long idEmployee);
     TransactionPointDTO save(EditDTO editDTO);
     TransactionPointDTO saveStatus(long  id , int status);
     Object saveLeader(EditLeaderPoint editLeaderPoint);
