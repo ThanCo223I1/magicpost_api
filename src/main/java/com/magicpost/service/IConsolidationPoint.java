@@ -20,4 +20,5 @@ public interface IConsolidationPoint {
 
     List<ConsolidationPoint> findAllByNotInAccountId(long accountId);
     ConsolidationPoint findByTransactionPoint_AccountId(long accountId);
+    ConsolidationPoint findConsolidationPointsByAccountId(long accountId);
 }

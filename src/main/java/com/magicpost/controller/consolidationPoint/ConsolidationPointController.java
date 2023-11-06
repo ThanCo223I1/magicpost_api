@@ -14,7 +14,7 @@ public class ConsolidationPointController {
     @Autowired
     IConsolidationPoint iConsolidationPoint;
 
-    @GetMapping("/account/{idAccount}")
+    @GetMapping("/notAccount/{idAccount}")
     public List<ConsolidationPoint> findAllByNotInAccountId(@PathVariable long idAccount) {
         return iConsolidationPoint.findAllByNotInAccountId(idAccount);
     }
@@ -22,5 +22,10 @@ public class ConsolidationPointController {
     @GetMapping("/transactionPoint/account/{idAccount}")
     public ConsolidationPoint findByTransactionPoint_AccountId(@PathVariable long idAccount) {
         return iConsolidationPoint.findByTransactionPoint_AccountId(idAccount);
+    }
+
+    @GetMapping("/account/{idAccount}")
+    public ConsolidationPoint findConsolidationPointsByAccountId(@PathVariable long idAccount) {
+        return iConsolidationPoint.findConsolidationPointsByAccountId(idAccount);
     }
 }
