@@ -40,4 +40,16 @@ public class Orders_ConsolidationPointDTOImpl implements IOrders_ConsolidationPo
     public void save(Orders orders) {
         iOrdersRepo.save(orders);
     }
+
+    @Override
+    public List<Orders_ConsolidationPointDTO> findByConsolidationPoints_Employee_IdAccount(long accountId) {
+        List<Orders_ConsolidationPointDTO> orders_consolidationPointDTOList = new ArrayList<>();
+        Orders_ConsolidationPointDTO orders_consolidationPointDTO;
+        long count = 0;
+        for (Orders order : iOrdersRepo.findByConsolidationPoints_Employee_IdAccount(accountId)) {
+            orders_consolidationPointDTO = new Orders_ConsolidationPointDTO(count++, order, iOrderTypeRepo.findTypesByOrderId(order.getId()));
+            orders_consolidationPointDTOList.add(orders_consolidationPointDTO);
+        }
+        return orders_consolidationPointDTOList;
+    }
 }

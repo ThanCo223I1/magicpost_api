@@ -25,8 +25,7 @@ public class OrdersController2 {
 
     @GetMapping("/consolidationPoint/account/{accountId}")
     public List<Orders_ConsolidationPointDTO> order_consolidationPoint(@PathVariable long accountId) {
-        Account account = iAccount.findAccountById(accountId);
-        return iOrders_consolidationPointDTO.findAllOrder_ConsolidationPoint(account);
+        return iOrders_consolidationPointDTO.findByConsolidationPoints_Employee_IdAccount(accountId);
     }
 
     @GetMapping("/transactionPoint/account/{accountId}")

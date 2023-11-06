@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -30,8 +31,14 @@ public class Orders {
     private double weight;
     @OneToOne
     private TransactionPoint transactionPoint;
-    @OneToOne
+    @ManyToOne
     private ConsolidationPoint consolidationPoint;
+    @ManyToMany
+    @JoinTable(
+            name = "orders_consolidation_points",
+            joinColumns = @JoinColumn(name = "orders_id"),
+            inverseJoinColumns = @JoinColumn(name = "consolidation_points_id"))
+    private List<ConsolidationPoint> consolidationPoints;
     @ManyToOne
     private Status status;
 
