@@ -12,4 +12,5 @@ public interface ITransactionPointRepo extends JpaRepository<TransactionPoint , 
     @Query(nativeQuery = true,value = "select transaction_point_id from transaction_point_employee t where t.employee_id=:idEmployee")
     long findIdTransactionByIdEmployee(@Param("idEmployee")long idEmployee);
     List<TransactionPoint> findAllByStatus(int status);
+
 }

@@ -29,7 +29,6 @@ public class OrderService implements IOrderService {
 
     @Override
     public Orders createOrders(Orders orders,long idEmployee) {
-//        Employee employeeConsolidation=iEmployeeRepo.findEmployeeConsolidation(idEmployee).get();
         Employee employeeTransaction=iEmployeeRepo.findEmployeeTransaction(idEmployee).orElse(null);
         if(employeeTransaction==null){
             long idConsolidationPoint=iConsolidationPoint.findIdConsolidationByEmployee(idEmployee);
