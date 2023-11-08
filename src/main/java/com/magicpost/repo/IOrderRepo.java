@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface IOrderRepo extends JpaRepository<Orders, Long> {
     List<Orders> findAllByTransactionPoint_Id(long id);
-    List<Orders> findAllByConsolidationPoint_Id(long id);
+
 }

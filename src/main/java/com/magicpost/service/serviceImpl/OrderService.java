@@ -34,7 +34,7 @@ public class OrderService implements IOrderService {
         if(employeeTransaction==null){
             long idConsolidationPoint=iConsolidationPoint.findIdConsolidationByEmployee(idEmployee);
             ConsolidationPoint consolidationPoint=iConsolidationPoint.findById(idConsolidationPoint);
-            orders.setConsolidationPoint(consolidationPoint);
+            orders.getConsolidationPoints().add(consolidationPoint);
         }else {
             long idTransactionPoint=iTransactionPoint.findIdTransactionByIdEmployee(idEmployee);
             TransactionPoint transactionPoint=iTransactionPoint.findById(idTransactionPoint).get();

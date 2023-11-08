@@ -16,4 +16,5 @@ public interface IEmployeeRepo extends JpaRepository<Employee , Long> {
     @Query(nativeQuery = true,value = "select * from employee e join transaction_point_employee t on t.employee_id=e.id where e.id=:idEmployee")
     Optional<Employee> findEmployeeTransaction(@Param("idEmployee") long idEmployee);
 
+
 }

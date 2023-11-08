@@ -1,6 +1,8 @@
 package com.magicpost.service.serviceImpl;
 
 import com.magicpost.model.Account;
+import com.magicpost.model.Status;
+import com.magicpost.model.dto.AccountDTO;
 import com.magicpost.repo.IAccountRepo;
 import com.magicpost.service.IAccount;
 import org.springframework.security.core.GrantedAuthority;
@@ -67,5 +69,15 @@ public class AccountImpl implements IAccount {
     @Override
     public Account getAccountLogin(String username, String password) {
         return iAccountRepo.getAccountByUsernameAndPassword(username , password);
+    }
+
+    @Override
+    public AccountDTO editStatus(long idAccount, long idStatus) {
+        Account account = iAccountRepo.findById(idAccount).get();
+        Status status =new Status();
+        status.setId(idStatus);
+        account.setStatus(status);
+        account = iAccountRepo.save(account);
+        return account.accountDTO();
     }
 }

@@ -2,6 +2,7 @@ package com.magicpost.controller.Account.EmployeeAccount;
 
 import com.magicpost.model.dto.CreateEmployeeRequest;
 import com.magicpost.model.dto.EmployeeDTO;
+import com.magicpost.service.IAccount;
 import com.magicpost.service.IEmployee;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,9 +12,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/account/employee")
 public class EmployeeAccount {
     private final IEmployee iEmployee;
+    private final IAccount iAccount;
 
-    public EmployeeAccount(IEmployee iEmployee) {
+    public EmployeeAccount(IEmployee iEmployee, IAccount iAccount) {
         this.iEmployee = iEmployee;
+        this.iAccount = iAccount;
     }
 
     @PostMapping("createTran")
@@ -32,5 +35,9 @@ public class EmployeeAccount {
             return ResponseEntity.ok("account already exists");
         }
         return ResponseEntity.ok((EmployeeDTO) o);
+    }
+    @GetMapping("{idAccount}/{idStatus}")
+    public ResponseEntity<?> editStatusAccountEmployee(@PathVariable long idAccount , @PathVariable long idStatus){
+        return ResponseEntity.ok(iAccount.editStatus(idAccount,idStatus));
     }
 }

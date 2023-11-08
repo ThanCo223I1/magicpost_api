@@ -44,7 +44,7 @@ public class ConsolidationImpl implements IConsolidationPoint {
         iLeader.create(account,leader);
         consolidationPoint.setLeader(leader);
         iConsolidationPointRepo.save(consolidationPoint);
-        return consolidationPoint.consolidationPointDTOLeader();
+        return consolidationPoint.noEmployeeConsolidationPointDTO();
     }
 
     @Override
@@ -59,7 +59,7 @@ public class ConsolidationImpl implements IConsolidationPoint {
 
     @Override
     public ConsolidationPointDTO findByLeader_Id(long id) {
-        return iConsolidationPointRepo.findByLeader_Id(id).noEmployeeConsolidationPointDTO();
+        return iConsolidationPointRepo.findByLeader_Id(id).consolidationPointDTOLeader();
     }
 
     @Override
