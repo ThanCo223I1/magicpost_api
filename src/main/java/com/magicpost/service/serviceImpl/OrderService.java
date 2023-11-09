@@ -70,4 +70,16 @@ public class OrderService implements IOrderService {
         }
 
     }
+
+    @Override
+    public List<Object[]> getReceivedOrdersByConsolidationPoint() {
+        List<Object[]> results = iOrderRepo.getReceivedOrdersByConsolidationPoint();
+
+        return results;
+    }public List<Object[]> getSentOrdersByTransactionPoint() {
+        List<Object[]> results = iOrderRepo.getSentOrdersByTransactionPoint();
+        return results;
+    }
+
+
 }

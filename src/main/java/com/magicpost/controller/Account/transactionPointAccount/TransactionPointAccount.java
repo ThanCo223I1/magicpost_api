@@ -4,6 +4,7 @@ import com.magicpost.model.dto.CreateTransactionRequest;
 import com.magicpost.model.dto.EditDTO;
 import com.magicpost.model.dto.EditLeaderPoint;
 import com.magicpost.model.dto.TransactionPointDTO;
+import com.magicpost.service.IOrderService;
 import com.magicpost.service.ITransactionPoint;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,9 +16,11 @@ import java.util.List;
 @RequestMapping("/account/transaction")
 public class TransactionPointAccount {
     private final ITransactionPoint iTransactionPoint;
+    private final IOrderService iOrderService;
 
-    public TransactionPointAccount(ITransactionPoint iTransactionPoint) {
+    public TransactionPointAccount(ITransactionPoint iTransactionPoint, IOrderService iOrderService) {
         this.iTransactionPoint = iTransactionPoint;
+        this.iOrderService = iOrderService;
     }
 
     @PostMapping("create")
@@ -27,6 +30,7 @@ public class TransactionPointAccount {
 
     @GetMapping()
     public ResponseEntity<List<TransactionPointDTO>> getAllActive() {
+        iOrderService.getReceivedOrdersByConsolidationPoint();
         return ResponseEntity.ok(iTransactionPoint.findAllByStatus(1));
     }
     @GetMapping("block")
