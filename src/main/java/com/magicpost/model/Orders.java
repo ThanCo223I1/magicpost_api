@@ -20,6 +20,7 @@ public class Orders {
     private long id;
     private String image;
     private Date createOrder;
+    private Date endOrder;
     private String nameSender;
     private String nameReceiver;
     private String phoneSender;

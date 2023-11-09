@@ -11,4 +11,5 @@ public interface IEmployee {
     Object createEmployeeTransaction(CreateEmployeeRequest createEmployeeRequest);
     Object createEmployeeConsolidation(CreateEmployeeRequest createEmployeeRequest);
     Employee  findByAccount_Id(long id);
+
 }
