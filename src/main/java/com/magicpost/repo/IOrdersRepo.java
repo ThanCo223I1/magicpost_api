@@ -1,10 +1,13 @@
 package com.magicpost.repo;
 
 import com.magicpost.model.Orders;
+import com.magicpost.model.dto.DateEndOrder_YearDTO;
+import com.magicpost.model.dto.OrderStatistics_ConsolidationPoint_Leader;
+import org.hibernate.transform.ResultTransformer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
+import java.util.ArrayList;
 import java.util.List;
 
 public interface IOrdersRepo extends JpaRepository<Orders, Long> {
@@ -23,4 +26,19 @@ public interface IOrdersRepo extends JpaRepository<Orders, Long> {
             "where a.id = :accountId " +
             "order by (select name_status from status where id = o.status_id) desc, o.id desc;")
     List<Orders> findByConsolidationPoints_Employee_IdAccount(@Param("accountId") long accountId);
+
+    @Query(nativeQuery = true, value ="SELECT DISTINCT YEAR(end_Order) AS year " +
+            "FROM Orders")
+    List<Integer> findDistinctEndOrderYears();
+
+    default List<DateEndOrder_YearDTO> dateEndOrder_Year() {
+        List<Integer> years = findDistinctEndOrderYears();
+        List<DateEndOrder_YearDTO> dtos = new ArrayList<>();
+        long id = 0L;
+        for (Integer year : years) {
+            if (year != null) {
+            dtos.add(new DateEndOrder_YearDTO(id++, year));}
+        }
+        return dtos;
+    }
 }

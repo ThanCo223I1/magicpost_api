@@ -51,4 +51,9 @@ public class OrdersController2 {
     public ResponseEntity<?> getSentOrdersByTransactionPoint(){
         return ResponseEntity.ok(iOrderService.getSentOrdersByTransactionPoint());
     }
+
+    @PostMapping("/deleteOrder/{id}")
+    public void deleteOrder(@PathVariable long id) {
+        iOrderService.deleteOrder(id);
+    }
 }

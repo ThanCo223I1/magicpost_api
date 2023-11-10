@@ -14,4 +14,5 @@ public interface IOrderService {
     OrdersDTO findById(long id);
     List<Object[]> getReceivedOrdersByConsolidationPoint();
     List<Object[]> getSentOrdersByTransactionPoint();
+    void deleteOrder(long id);
 }
