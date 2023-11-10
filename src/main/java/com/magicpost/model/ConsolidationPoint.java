@@ -25,14 +25,18 @@ public class ConsolidationPoint {
     @OneToMany
     private List<Employee> employee;
     private int status;
-    public ConsolidationPointDTO noEmployeeConsolidationPointDTO(){
-        return new ConsolidationPointDTO(this.id,this.name,this.address,this.status);
+
+    public ConsolidationPointDTO noEmployeeConsolidationPointDTO() {
+        return new ConsolidationPointDTO(this.id, this.name, this.address, this.status);
     }
-    public ConsolidationPointDTO consolidationPointDTOLeader(){
+
+    public ConsolidationPointDTO consolidationPointDTOLeader() {
         List<EmployeeDTO> employeeDTOS = new ArrayList<>();
-        for (Employee e:this.employee) {
-            employeeDTOS.add(e.employeeDTO());
+        if (this.employee != null) {
+            for (Employee e : this.employee) {
+                employeeDTOS.add(e.employeeDTO());
+            }
         }
-        return new ConsolidationPointDTO(this.id,this.name,this.address,this.leader.leaderDTO(),employeeDTOS,this.status);
+        return new ConsolidationPointDTO(this.id, this.name, this.address, this.leader.leaderDTO(), employeeDTOS, this.status);
     }
 }

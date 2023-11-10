@@ -27,16 +27,20 @@ public class TransactionPoint {
     @ManyToOne
     private ConsolidationPoint consolidationPoint;
     private int status;
-    public TransactionPointDTO transactionPointDTO(){
+
+    public TransactionPointDTO transactionPointDTO() {
         List<EmployeeDTO> employeeDTOS = new ArrayList<>();
-        for (Employee e:this.employee) {
-            employeeDTOS.add(e.employeeDTO());
+        if (employee != null) {
+            for (Employee e : this.employee) {
+                employeeDTOS.add(e.employeeDTO());
+            }
         }
-        return new TransactionPointDTO(this.id,this.name,this.address,this.leader.leaderDTO()
-                ,employeeDTOS,this.consolidationPoint.noEmployeeConsolidationPointDTO(),this.status);
+        return new TransactionPointDTO(this.id, this.name, this.address, this.leader.leaderDTO()
+                , employeeDTOS, this.consolidationPoint.noEmployeeConsolidationPointDTO(), this.status);
     }
-    public TransactionPointDTO noEmployeeTransactionPointDTO(){
-        return new TransactionPointDTO(this.id,this.name,this.address,this.leader.leaderDTO()
-                ,this.consolidationPoint.noEmployeeConsolidationPointDTO());
+
+    public TransactionPointDTO noEmployeeTransactionPointDTO() {
+        return new TransactionPointDTO(this.id, this.name, this.address, this.leader.leaderDTO()
+                , this.consolidationPoint.noEmployeeConsolidationPointDTO());
     }
 }
