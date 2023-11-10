@@ -26,6 +26,7 @@ public class Employee {
     @OneToOne
     private Account account;
     public EmployeeDTO employeeDTO (){
-        return new EmployeeDTO(this.id,this.name,this.phoneNumber,this.address,this.email,this.avatar,this.idCard,this.role);
+        return new EmployeeDTO(this.id,this.account.getId(),this.account.getStatus().getId(),this.name
+                ,this.phoneNumber,this.address,this.email,this.avatar,this.idCard,this.role);
     }
 }

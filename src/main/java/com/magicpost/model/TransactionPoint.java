@@ -33,7 +33,25 @@ public class TransactionPoint {
             employeeDTOS.add(e.employeeDTO());
         }
         return new TransactionPointDTO(this.id,this.name,this.address,this.leader.leaderDTO()
-                ,employeeDTOS,this.consolidationPoint.noEmployeeConsolidationPointDTO(),this.status);
+                ,employeeDTOS,transactionPointDTOEmployeeActive(),transactionPointDTOEmployeeBlock(),this.consolidationPoint.noEmployeeConsolidationPointDTO(),this.status);
+    }
+    public List<EmployeeDTO> transactionPointDTOEmployeeActive(){
+        List<EmployeeDTO> employeeDTOS = new ArrayList<>();
+        for (Employee e:this.employee) {
+           if (e.getAccount().getStatus().getId()==1){
+               employeeDTOS.add(e.employeeDTO());
+           }
+        }
+        return employeeDTOS;
+    }
+    public List<EmployeeDTO> transactionPointDTOEmployeeBlock(){
+        List<EmployeeDTO> employeeDTOS = new ArrayList<>();
+        for (Employee e:this.employee) {
+            if (e.getAccount().getStatus().getId()==2){
+                employeeDTOS.add(e.employeeDTO());
+            }
+        }
+        return employeeDTOS;
     }
     public TransactionPointDTO noEmployeeTransactionPointDTO(){
         return new TransactionPointDTO(this.id,this.name,this.address,this.leader.leaderDTO()

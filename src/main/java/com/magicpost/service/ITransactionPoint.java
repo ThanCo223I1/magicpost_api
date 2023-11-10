@@ -6,6 +6,7 @@ import com.magicpost.model.dto.CreateTransactionRequest;
 import com.magicpost.model.dto.EditDTO;
 import com.magicpost.model.dto.EditLeaderPoint;
 import com.magicpost.model.dto.TransactionPointDTO;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,4 +25,5 @@ public interface ITransactionPoint {
     TransactionPointDTO save(EditDTO editDTO);
     TransactionPointDTO saveStatus(long  id , int status);
     Object saveLeader(EditLeaderPoint editLeaderPoint);
+    TransactionPoint findTransactionPointsByAccountId(long accountId);
 }

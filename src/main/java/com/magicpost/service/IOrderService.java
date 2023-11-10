@@ -12,4 +12,6 @@ public interface IOrderService {
     List<OrdersDTO> findAllByTransactionPoint_Id(long id);
     List<OrdersDTO> findAllByConsolidationPoint_Id(long id);
     OrdersDTO findById(long id);
+    List<Object[]> getReceivedOrdersByConsolidationPoint();
+    List<Object[]> getSentOrdersByTransactionPoint();
 }

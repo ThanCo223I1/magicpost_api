@@ -44,7 +44,7 @@ public class ConsolidationImpl implements IConsolidationPoint {
         iLeader.create(account,leader);
         consolidationPoint.setLeader(leader);
         iConsolidationPointRepo.save(consolidationPoint);
-        return consolidationPoint.consolidationPointDTOLeader();
+        return consolidationPoint.noEmployeeConsolidationPointDTO();
     }
 
     @Override
@@ -59,7 +59,7 @@ public class ConsolidationImpl implements IConsolidationPoint {
 
     @Override
     public ConsolidationPointDTO findByLeader_Id(long id) {
-        return iConsolidationPointRepo.findByLeader_Id(id).noEmployeeConsolidationPointDTO();
+        return iConsolidationPointRepo.findByLeader_Id(id).consolidationPointDTOLeader();
     }
 
     @Override
@@ -100,5 +100,21 @@ public class ConsolidationImpl implements IConsolidationPoint {
             return iConsolidationPointRepo.save(consolidationPoint).consolidationPointDTOLeader();
         }
         return null;
+    }
+
+    @Override
+    public List<ConsolidationPoint> findAllByNotInAccountId(long accountId) {
+        List<ConsolidationPoint> consolidationPointList = iConsolidationPointRepo.findAllByNotInAccountId(accountId);
+        return consolidationPointList;
+    }
+
+    @Override
+    public ConsolidationPoint findByTransactionPoint_AccountId(long accountId) {
+        return iConsolidationPointRepo.findByTransactionPoint_AccountId(accountId);
+    }
+
+    @Override
+    public ConsolidationPoint findConsolidationPointsByAccountId(long accountId) {
+        return iConsolidationPointRepo.findConsolidationPointsByAccountId(accountId);
     }
 }
