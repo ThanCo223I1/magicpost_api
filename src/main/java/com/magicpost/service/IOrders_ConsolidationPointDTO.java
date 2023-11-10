@@ -9,7 +9,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface IOrders_ConsolidationPointDTO {
-    List<Orders_ConsolidationPointDTO> findAllOrder_ConsolidationPoint(Account account);
     void save(Orders orders);
     List<Orders_ConsolidationPointDTO> findByConsolidationPoints_Employee_IdAccount(long accountId);
 }

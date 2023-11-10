@@ -34,7 +34,7 @@ public class OrderService implements IOrderService {
         if(employeeTransaction==null){
             long idConsolidationPoint=iConsolidationPoint.findIdConsolidationByEmployee(idEmployee);
             ConsolidationPoint consolidationPoint=iConsolidationPoint.findById(idConsolidationPoint);
-            orders.setConsolidationPoint(consolidationPoint);
+            orders.getConsolidationPoints().add(consolidationPoint);
         }else {
             long idTransactionPoint=iTransactionPoint.findIdTransactionByIdEmployee(idEmployee);
             TransactionPoint transactionPoint=iTransactionPoint.findById(idTransactionPoint).get();
@@ -70,4 +70,16 @@ public class OrderService implements IOrderService {
         }
 
     }
+
+    @Override
+    public List<Object[]> getReceivedOrdersByConsolidationPoint() {
+        List<Object[]> results = iOrderRepo.getReceivedOrdersByConsolidationPoint();
+
+        return results;
+    }public List<Object[]> getSentOrdersByTransactionPoint() {
+        List<Object[]> results = iOrderRepo.getSentOrdersByTransactionPoint();
+        return results;
+    }
+
+
 }

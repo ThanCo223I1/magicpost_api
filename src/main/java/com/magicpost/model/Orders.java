@@ -1,11 +1,13 @@
 package com.magicpost.model;
 
+import com.magicpost.model.dto.ConsolidationPointDTO;
 import com.magicpost.model.dto.OrdersDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -32,8 +34,6 @@ public class Orders {
     private double weight;
     @OneToOne
     private TransactionPoint transactionPoint;
-    @ManyToOne
-    private ConsolidationPoint consolidationPoint;
     @ManyToMany
     @JoinTable(
             name = "orders_consolidation_points",
@@ -44,9 +44,14 @@ public class Orders {
     private Status status;
 
     public OrdersDTO orderDTO() {
+        List<ConsolidationPointDTO> consolidationPointDTOS = new ArrayList<>();
+        for (ConsolidationPoint c : this.consolidationPoints) {
+            consolidationPointDTOS.add(c.noEmployeeConsolidationPointDTO());
+
+        }
         return new OrdersDTO(this.id, this.image, this.createOrder, this.nameSender, this.nameReceiver, this.phoneSender, this.phoneReceiver,
                 this.addressSender, this.addressReceiver, this.width, this.height, this.weight,
-                this.transactionPoint.noEmployeeTransactionPointDTO(), this.consolidationPoint.noEmployeeConsolidationPointDTO(), this.status);
+                this.transactionPoint.noEmployeeTransactionPointDTO(), consolidationPointDTOS, this.status);
     }
 
 }

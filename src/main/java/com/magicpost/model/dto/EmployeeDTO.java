@@ -17,6 +17,8 @@ import javax.persistence.OneToOne;
 @Setter
 public class EmployeeDTO {
     private long id;
+    private long idAccount;
+    private long idStatusAccount;
     private String name;
     private String phoneNumber;
     private String address;

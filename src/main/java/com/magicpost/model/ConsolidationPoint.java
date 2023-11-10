@@ -32,11 +32,29 @@ public class ConsolidationPoint {
 
     public ConsolidationPointDTO consolidationPointDTOLeader() {
         List<EmployeeDTO> employeeDTOS = new ArrayList<>();
-        if (this.employee != null) {
-            for (Employee e : this.employee) {
+        for (Employee e : this.employee) {
+            employeeDTOS.add(e.employeeDTO());
+        }
+        return new ConsolidationPointDTO(this.id, this.name, this.address, this.leader.leaderDTO(), employeeDTOS, consolidationPointDTOEmployeeActive(), consolidationPointDTOEmployeeBlock(), this.status);
+    }
+
+    public List<EmployeeDTO> consolidationPointDTOEmployeeActive() {
+        List<EmployeeDTO> employeeDTOS = new ArrayList<>();
+        for (Employee e : this.employee) {
+            if (e.getAccount().getStatus().getId() == 1) {
                 employeeDTOS.add(e.employeeDTO());
             }
         }
-        return new ConsolidationPointDTO(this.id, this.name, this.address, this.leader.leaderDTO(), employeeDTOS, this.status);
+        return employeeDTOS;
+    }
+
+    public List<EmployeeDTO> consolidationPointDTOEmployeeBlock() {
+        List<EmployeeDTO> employeeDTOS = new ArrayList<>();
+        for (Employee e : this.employee) {
+            if (e.getAccount().getStatus().getId() == 2) {
+                employeeDTOS.add(e.employeeDTO());
+            }
+        }
+        return employeeDTOS;
     }
 }
