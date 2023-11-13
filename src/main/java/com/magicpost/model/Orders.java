@@ -49,7 +49,7 @@ public class Orders {
             consolidationPointDTOS.add(c.noEmployeeConsolidationPointDTO());
 
         }
-        return new OrdersDTO(this.id, this.image, this.createOrder, this.nameSender, this.nameReceiver, this.phoneSender, this.phoneReceiver,
+        return new OrdersDTO(this.id, this.image, this.createOrder,this.endOrder ,this.nameSender, this.nameReceiver, this.phoneSender, this.phoneReceiver,
                 this.addressSender, this.addressReceiver, this.width, this.height, this.weight,
                 this.transactionPoint.noEmployeeTransactionPointDTO(), consolidationPointDTOS, this.status);
     }
