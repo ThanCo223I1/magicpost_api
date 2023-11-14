@@ -18,4 +18,5 @@ public class LeaderDTO {
     private String name;
     private String phoneNumber;
     private Role role;
+    private Account account;
 }

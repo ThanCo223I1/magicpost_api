@@ -24,13 +24,13 @@ public class OrdersDTO {
     private String addressReceiver;
     private String width;
     private String height;
-    private double weight;
+    private String weight;
     private TransactionPointDTO transactionPoint;
     private List<ConsolidationPointDTO> consolidationPoints;
     private Status status;
 
     public OrdersDTO(long id, String image, Date createOrder, Date endOrder,String nameSender, String nameReceiver, String phoneSender,
-                     String phoneReceiver, String addressSender, String addressReceiver, String width, String height, double weight,
+                     String phoneReceiver, String addressSender, String addressReceiver, String width, String height, String weight,
                      TransactionPointDTO transactionPoint, List<ConsolidationPointDTO> consolidationPoint, Status status) {
         this.id = id;
         this.image = image;

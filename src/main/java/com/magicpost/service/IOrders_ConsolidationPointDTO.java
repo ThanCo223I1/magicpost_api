@@ -11,4 +11,6 @@ import java.util.List;
 public interface IOrders_ConsolidationPointDTO {
     void save(Orders orders);
     List<Orders_ConsolidationPointDTO> findByConsolidationPoints_Employee_IdAccount(long accountId);
+    Orders sendOrder(long idOrder, ConsolidationPoint consolidationPoint);
+    List<ConsolidationPoint> findAllByNotInAccountId_AndNotConsolExistOrder(long idAccount, long idOrder);
 }

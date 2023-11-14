@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Service
 public class ConsolidationImpl implements IConsolidationPoint {
     private final IConsolidationPointRepo iConsolidationPointRepo;
@@ -29,7 +30,7 @@ public class ConsolidationImpl implements IConsolidationPoint {
     public List<ConsolidationPointDTO> findAllByStatus(int status) {
         List<ConsolidationPoint> consolidationPoints = iConsolidationPointRepo.findAllByStatus(status);
         List<ConsolidationPointDTO> consolidationPointDTOS = new ArrayList<>();
-        for (ConsolidationPoint c: consolidationPoints) {
+        for (ConsolidationPoint c : consolidationPoints) {
             consolidationPointDTOS.add(c.consolidationPointDTOLeader());
         }
         return consolidationPointDTOS;
@@ -41,7 +42,7 @@ public class ConsolidationImpl implements IConsolidationPoint {
         Leader leader = createConsolidationRequest.getLeader();
         ConsolidationPoint consolidationPoint = createConsolidationRequest.getConsolidationPoint();
         iAccount.create(account);
-        iLeader.create(account,leader);
+        iLeader.create(account, leader);
         consolidationPoint.setLeader(leader);
         iConsolidationPointRepo.save(consolidationPoint);
         return consolidationPoint.noEmployeeConsolidationPointDTO();
@@ -66,12 +67,14 @@ public class ConsolidationImpl implements IConsolidationPoint {
     public long findIdConsolidationByEmployee(long idEmployee) {
         return iConsolidationPointRepo.findIdConsolidationByIdEmployee(idEmployee);
     }
+
     @Override
     public ConsolidationPointDTO saveStatus(long id, int status) {
         ConsolidationPoint consolidationPoint = iConsolidationPointRepo.findById(id).get();
         consolidationPoint.setStatus(status);
         return iConsolidationPointRepo.save(consolidationPoint).noEmployeeConsolidationPointDTO();
     }
+
     @Override
     public Object saveLeader(EditLeaderPoint editLeaderPoint) {
         Account account = iAccount.findById(editLeaderPoint.getIdAccount()).get();
@@ -84,13 +87,14 @@ public class ConsolidationImpl implements IConsolidationPoint {
                 ConsolidationPoint consolidationPoint = iConsolidationPointRepo.findById(editLeaderPoint.getId()).get();
                 consolidationPoint.setLeader(leader);
                 return iConsolidationPointRepo.save(consolidationPoint).noEmployeeConsolidationPointDTO();
-            }catch (Exception e){
+            } catch (Exception e) {
                 return "account already exists";
             }
 
         }
         return null;
     }
+
     @Override
     public ConsolidationPointDTO saveEdit(EditDTO editDTO) {
         Account account = iAccount.findById(editDTO.getIdAccount()).get();

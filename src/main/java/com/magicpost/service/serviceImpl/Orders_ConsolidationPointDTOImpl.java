@@ -16,6 +16,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class Orders_ConsolidationPointDTOImpl implements IOrders_ConsolidationPointDTO {
@@ -40,5 +41,25 @@ public class Orders_ConsolidationPointDTOImpl implements IOrders_ConsolidationPo
             orders_consolidationPointDTOList.add(orders_consolidationPointDTO);
         }
         return orders_consolidationPointDTOList;
+    }
+
+    @Override
+    public Orders sendOrder(long idOrder, ConsolidationPoint consolidationPoint) {
+        Orders order = iOrdersRepo.findById(idOrder).get();
+
+        List<ConsolidationPoint> uniqueConsolidationPoints = new ArrayList<>(order.getConsolidationPoints());
+
+        uniqueConsolidationPoints.removeIf(cp -> cp.equals(consolidationPoint));
+
+        uniqueConsolidationPoints.add(consolidationPoint);
+
+        order.setConsolidationPoints(uniqueConsolidationPoints);
+
+        return iOrdersRepo.save(order);
+    }
+
+    @Override
+    public List<ConsolidationPoint> findAllByNotInAccountId_AndNotConsolExistOrder(long idAccount, long idOrder) {
+        return iConsolidationPointRepo.findAllByNotInAccountId_AndNotConsolExistOrder(idAccount, idOrder);
     }
 }

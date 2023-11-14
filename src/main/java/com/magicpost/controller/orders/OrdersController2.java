@@ -1,6 +1,7 @@
 package com.magicpost.controller.orders;
 
 import com.magicpost.model.Account;
+import com.magicpost.model.ConsolidationPoint;
 import com.magicpost.model.Orders;
 import com.magicpost.model.dto.Orders_ConsolidationPointDTO;
 import com.magicpost.model.dto.Orders_TransactionPointDTO;
@@ -43,21 +44,34 @@ public class OrdersController2 {
     public void save(@RequestBody Orders orders) {
         iOrders_consolidationPointDTO.save(orders);
     }
+
     @GetMapping("/getAllOrder")
-    public ResponseEntity<List<Orders>> getAllOrders(@RequestParam int month, @RequestParam int year){
-        return ResponseEntity.ok(iOrderService.getOrdersByMonthAndYear(month,year));
+    public ResponseEntity<List<Orders>> getAllOrders(@RequestParam int month, @RequestParam int year) {
+        return ResponseEntity.ok(iOrderService.getOrdersByMonthAndYear(month, year));
     }
+
     @GetMapping("getReceivedOrdersByConsolidationPoint")
-    public ResponseEntity<?> getReceivedOrdersByConsolidationPoint(@RequestParam int month,@RequestParam int year){
-        return ResponseEntity.ok(iOrderService.getIncoming(month,year));
+    public ResponseEntity<?> getReceivedOrdersByConsolidationPoint(@RequestParam int month, @RequestParam int year) {
+        return ResponseEntity.ok(iOrderService.getIncoming(month, year));
     }
+
     @GetMapping("getSentOrdersByTransactionPoint")
-    public ResponseEntity<?> getSentOrdersByTransactionPoint(@RequestParam int month, @RequestParam int year){
-        return ResponseEntity.ok(iOrderService.getOutgoing(month,year));
+    public ResponseEntity<?> getSentOrdersByTransactionPoint(@RequestParam int month, @RequestParam int year) {
+        return ResponseEntity.ok(iOrderService.getOutgoing(month, year));
     }
 
     @PostMapping("/deleteOrder/{id}")
     public void deleteOrder(@PathVariable long id) {
         iOrderService.deleteOrder(id);
+    }
+
+    @PostMapping("/{idOrder}/sendTo_ConsolidationPoint")
+    public Orders sendTo_ConsolidationPoint(@PathVariable long idOrder, @RequestBody ConsolidationPoint consolidationPoint) {
+        return iOrders_consolidationPointDTO.sendOrder(idOrder, consolidationPoint);
+    }
+
+    @GetMapping("/{idOrder}/findAllByNotInAccountId_AndNotConsolExistOrder/{idAccount}")
+    public List<ConsolidationPoint> findAllByNotInAccountId_AndNotConsolExistOrder(@PathVariable long idOrder, @PathVariable long idAccount) {
+        return iOrders_consolidationPointDTO.findAllByNotInAccountId_AndNotConsolExistOrder(idAccount, idOrder);
     }
 }

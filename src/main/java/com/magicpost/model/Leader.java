@@ -21,7 +21,8 @@ public class Leader {
     private Account account;
     @ManyToOne
     private Role role;
-    public LeaderDTO leaderDTO(){
-        return new LeaderDTO(this.id,this.name,this.phoneNumber,this.role);
+
+    public LeaderDTO leaderDTO() {
+        return new LeaderDTO(this.id, this.name, this.phoneNumber, this.role, this.account);
     }
 }

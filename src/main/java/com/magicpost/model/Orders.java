@@ -19,7 +19,6 @@ import java.util.List;
 public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(columnDefinition = "bigint 0")
     private long id;
     private String image;
     private Date createOrder;
@@ -32,7 +31,7 @@ public class Orders {
     private String addressReceiver;
     private String width;
     private String height;
-    private double weight;
+    private String weight;
     @OneToOne
     private TransactionPoint transactionPoint;
     @ManyToMany

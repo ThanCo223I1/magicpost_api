@@ -10,7 +10,7 @@ public interface IConsolidationPoint {
     ConsolidationPointDTO create(CreateConsolidationRequest createConsolidationRequest);
     ConsolidationPoint findById(long id);
     ConsolidationPoint save(ConsolidationPoint consolidationPoint);
-    ConsolidationPointDTO  findByLeader_Id(long id);
+    ConsolidationPointDTO findByLeader_Id(long id);
 
     long findIdConsolidationByEmployee(long idEmployee);
     ConsolidationPointDTO saveStatus(long  id , int status);
