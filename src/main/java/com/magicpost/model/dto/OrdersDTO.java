@@ -15,6 +15,7 @@ public class OrdersDTO {
     private long id;
     private String image;
     private Date createOrder;
+    private Date endOrder;
     private String nameSender;
     private String nameReceiver;
     private String phoneSender;
@@ -28,12 +29,13 @@ public class OrdersDTO {
     private List<ConsolidationPointDTO> consolidationPoints;
     private Status status;
 
-    public OrdersDTO(long id, String image, Date createOrder, String nameSender, String nameReceiver, String phoneSender,
+    public OrdersDTO(long id, String image, Date createOrder, Date endOrder,String nameSender, String nameReceiver, String phoneSender,
                      String phoneReceiver, String addressSender, String addressReceiver, String width, String height, double weight,
                      TransactionPointDTO transactionPoint, List<ConsolidationPointDTO> consolidationPoint, Status status) {
         this.id = id;
         this.image = image;
         this.createOrder = createOrder;
+        this.endOrder = endOrder;
         this.nameSender = nameSender;
         this.nameReceiver = nameReceiver;
         this.phoneSender = phoneSender;

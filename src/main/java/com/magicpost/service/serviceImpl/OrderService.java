@@ -100,4 +100,9 @@ public class OrderService implements IOrderService {
         return results;
     }
 
+    @Override
+    public void deleteOrder(long id) {
+        iOrderRepo.deleteById(id);
+    }
+
 }

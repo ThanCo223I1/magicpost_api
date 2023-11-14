@@ -55,4 +55,9 @@ public class OrdersController2 {
     public ResponseEntity<?> getSentOrdersByTransactionPoint(@RequestParam int month, @RequestParam int year){
         return ResponseEntity.ok(iOrderService.getOutgoing(month,year));
     }
+
+    @PostMapping("/deleteOrder/{id}")
+    public void deleteOrder(@PathVariable long id) {
+        iOrderService.deleteOrder(id);
+    }
 }

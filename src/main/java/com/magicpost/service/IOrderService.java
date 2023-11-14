@@ -20,6 +20,7 @@ public interface IOrderService {
     List<Object[]> getReceivedOrdersByConsolidationPoint();
 
     List<Object[]> getSentOrdersByTransactionPoint();
+    void deleteOrder(long id);
 
     List<Object[]> getIncoming(int month, int year);
     List<Object[]> getOutgoing(int month, int year);
