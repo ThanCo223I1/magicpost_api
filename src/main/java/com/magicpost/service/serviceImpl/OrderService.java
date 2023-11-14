@@ -73,12 +73,31 @@ public class OrderService implements IOrderService {
     @Override
     public List<Object[]> getReceivedOrdersByConsolidationPoint() {
         List<Object[]> results = iOrderRepo.getReceivedOrdersByConsolidationPoint();
+        return results;    }
 
-        return results;
-    }public List<Object[]> getSentOrdersByTransactionPoint() {
-        List<Object[]> results = iOrderRepo.getSentOrdersByTransactionPoint();
+    @Override
+    public List<Object[]> getIncoming(int month,int year) {
+        List<Object[]> results = iOrderRepo.getIncoming(month, year);
+
         return results;
     }
 
+    @Override
+    public List<Object[]> getOutgoing(int month, int year) {
+        List<Object[]> results = iOrderRepo.getOutgoing(month, year);
+
+        return results;
+    }
+
+    @Override
+    public List<Orders> getOrdersByMonthAndYear(int month, int year) {
+        List<Orders> ordersList = iOrderRepo.getOrdersByMonthAndYear(month, year);
+        return ordersList;
+    }
+
+    public List<Object[]> getSentOrdersByTransactionPoint() {
+        List<Object[]> results = iOrderRepo.getSentOrdersByTransactionPoint();
+        return results;
+    }
 
 }

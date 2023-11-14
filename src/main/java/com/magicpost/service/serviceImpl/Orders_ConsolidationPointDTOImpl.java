@@ -10,7 +10,10 @@ import com.magicpost.repo.IOrdersRepo;
 import com.magicpost.service.IOrders_ConsolidationPointDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +25,6 @@ public class Orders_ConsolidationPointDTOImpl implements IOrders_ConsolidationPo
     IOrderTypeRepo iOrderTypeRepo;
     @Autowired
     IConsolidationPointRepo iConsolidationPointRepo;
-
     @Override
     public void save(Orders orders) {
         iOrdersRepo.save(orders);

@@ -36,4 +36,5 @@ public interface IOrdersRepo extends JpaRepository<Orders, Long> {
             "GROUP BY tp.name, MONTH(o.createOrder), YEAR(o.createOrder) " +
             "ORDER BY YEAR(o.createOrder), MONTH(o.createOrder)")
     List<Object[]> getSentOrdersByTransactionPoint();
+
 }

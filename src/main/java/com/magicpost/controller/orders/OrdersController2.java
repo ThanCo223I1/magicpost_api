@@ -43,12 +43,16 @@ public class OrdersController2 {
     public void save(@RequestBody Orders orders) {
         iOrders_consolidationPointDTO.save(orders);
     }
+    @GetMapping("/getAllOrder")
+    public ResponseEntity<List<Orders>> getAllOrders(@RequestParam int month, @RequestParam int year){
+        return ResponseEntity.ok(iOrderService.getOrdersByMonthAndYear(month,year));
+    }
     @GetMapping("getReceivedOrdersByConsolidationPoint")
-    public ResponseEntity<?> getReceivedOrdersByConsolidationPoint(){
-        return ResponseEntity.ok(iOrderService.getReceivedOrdersByConsolidationPoint());
+    public ResponseEntity<?> getReceivedOrdersByConsolidationPoint(@RequestParam int month,@RequestParam int year){
+        return ResponseEntity.ok(iOrderService.getIncoming(month,year));
     }
     @GetMapping("getSentOrdersByTransactionPoint")
-    public ResponseEntity<?> getSentOrdersByTransactionPoint(){
-        return ResponseEntity.ok(iOrderService.getSentOrdersByTransactionPoint());
+    public ResponseEntity<?> getSentOrdersByTransactionPoint(@RequestParam int month, @RequestParam int year){
+        return ResponseEntity.ok(iOrderService.getOutgoing(month,year));
     }
 }

@@ -19,6 +19,7 @@ import java.util.List;
 public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "bigint 0")
     private long id;
     private String image;
     private Date createOrder;
@@ -53,5 +54,6 @@ public class Orders {
                 this.addressSender, this.addressReceiver, this.width, this.height, this.weight,
                 this.transactionPoint.noEmployeeTransactionPointDTO(), consolidationPointDTOS, this.status);
     }
+
 
 }

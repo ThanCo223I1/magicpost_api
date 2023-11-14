@@ -7,11 +7,22 @@ import com.paypal.api.payments.Order;
 import java.util.List;
 
 public interface IOrderService {
-    Orders createOrders(Orders orders,long idEmployee);
+    Orders createOrders(Orders orders, long idEmployee);
+
     List<Orders> getAll();
+
     List<OrdersDTO> findAllByTransactionPoint_Id(long id);
+
     List<OrdersDTO> findAllByConsolidationPoint_Id(long id);
+
     OrdersDTO findById(long id);
+
     List<Object[]> getReceivedOrdersByConsolidationPoint();
+
     List<Object[]> getSentOrdersByTransactionPoint();
+
+    List<Object[]> getIncoming(int month, int year);
+    List<Object[]> getOutgoing(int month, int year);
+    List<Orders> getOrdersByMonthAndYear(int month, int year);
+
 }
