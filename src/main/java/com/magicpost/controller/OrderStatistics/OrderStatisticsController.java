@@ -1,7 +1,9 @@
 package com.magicpost.controller.OrderStatistics;
 
 import com.magicpost.model.dto.DateEndOrder_YearDTO;
+import com.magicpost.model.dto.OrderStatistics_AdminDTO;
 import com.magicpost.model.dto.OrderStatistics_ConsolidationPoint_Leader;
+import com.magicpost.service.IOrderStatistics_AdminDTO;
 import com.magicpost.service.IOrderStatistics_ConsolidationPoint_LeaderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +16,8 @@ import java.util.List;
 public class OrderStatisticsController {
     @Autowired
     IOrderStatistics_ConsolidationPoint_LeaderService iOrderStatisticsConsolidationPointLeaderService;
+    @Autowired
+    IOrderStatistics_AdminDTO iOrderStatisticsAdminDTO;
 
     @GetMapping("/consolidationPoint_Leader_StatusComplete/{idAccount}/year/{year}")
     public List<OrderStatistics_ConsolidationPoint_Leader> orderStatistics_ConsolidationPoint_Leader_StatusComplete(@PathVariable int year, @PathVariable long idAccount) {
@@ -28,5 +32,15 @@ public class OrderStatisticsController {
     @GetMapping("/dateEndOrder_Year")
     public List<DateEndOrder_YearDTO> dateEndOrder_Year() {
         return iOrderStatisticsConsolidationPointLeaderService.dateEndOrder_Year();
+    }
+
+    @GetMapping("/admin/transactionPoint/{idTransaction}/year/{year}/status/{idStatus}")
+    public List<OrderStatistics_AdminDTO> getOrderStatisticsByYear_IdTransaction_IdStatus(@PathVariable long idTransaction, @PathVariable long idStatus, @PathVariable int year) {
+        return iOrderStatisticsAdminDTO.getOrderStatisticsByYear_IdTransaction_IdStatus(idTransaction, idStatus, year);
+    }
+
+    @GetMapping("/admin/consolidationPoint/{idConsolidation}/year/{year}/status/{idStatus}")
+    public List<OrderStatistics_AdminDTO> getOrderStatisticsByYear_IdConsolidation_IdStatus(@PathVariable long idConsolidation, @PathVariable long idStatus, @PathVariable int year) {
+        return iOrderStatisticsAdminDTO.getOrderStatisticsByYear_IdConsolidation_IdStatus(idConsolidation, idStatus, year);
     }
 }

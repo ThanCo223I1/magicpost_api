@@ -115,4 +115,9 @@ public class TransactionImpl implements ITransactionPoint {
     public TransactionPoint findTransactionPointsByAccountId(long accountId) {
         return iTransactionPointRepo.findTransactionPointsByAccountId(accountId);
     }
+
+    @Override
+    public List<TransactionPoint> findAll() {
+        return iTransactionPointRepo.findAll();
+    }
 }

@@ -121,4 +121,9 @@ public class ConsolidationImpl implements IConsolidationPoint {
     public ConsolidationPoint findConsolidationPointsByAccountId(long accountId) {
         return iConsolidationPointRepo.findConsolidationPointsByAccountId(accountId);
     }
+
+    @Override
+    public List<ConsolidationPoint> findAll() {
+        return iConsolidationPointRepo.findAll();
+    }
 }

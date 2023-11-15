@@ -11,14 +11,12 @@ public interface IConsolidationPoint {
     ConsolidationPoint findById(long id);
     ConsolidationPoint save(ConsolidationPoint consolidationPoint);
     ConsolidationPointDTO findByLeader_Id(long id);
-
     long findIdConsolidationByEmployee(long idEmployee);
     ConsolidationPointDTO saveStatus(long  id , int status);
     Object saveLeader(EditLeaderPoint editLeaderPoint);
     ConsolidationPointDTO saveEdit(EditDTO editDTO);
-
-
     List<ConsolidationPoint> findAllByNotInAccountId(long accountId);
     ConsolidationPoint findByTransactionPoint_AccountId(long accountId);
     ConsolidationPoint findConsolidationPointsByAccountId(long accountId);
+    List<ConsolidationPoint> findAll();
 }

@@ -26,4 +26,5 @@ public interface ITransactionPoint {
     TransactionPointDTO saveStatus(long  id , int status);
     Object saveLeader(EditLeaderPoint editLeaderPoint);
     TransactionPoint findTransactionPointsByAccountId(long accountId);
+    List<TransactionPoint> findAll();
 }
