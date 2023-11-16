@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface IOrdersRepo extends JpaRepository<Orders, Long> {
 
-    @Query("SELECT o FROM Orders o WHERE o.transactionPoint.id = :transactionPointId ORDER BY o.status.nameStatus DESC, o.id DESC")
+    @Query("SELECT o FROM Orders o WHERE o.transactionPoint.id = :transactionPointId ORDER BY FIELD(o.status.id, 6, 3, 4), o.id DESC")
     List<Orders> findByTransactionPointId(@Param("transactionPointId") Long transactionPointId);
 
     @Query(nativeQuery = true, value = "select distinct o.* " +
@@ -24,7 +24,7 @@ public interface IOrdersRepo extends JpaRepository<Orders, Long> {
             "join employee e on e.id = cpe.employee_id " +
             "join account a on a.id = e.account_id " +
             "where a.id = :accountId " +
-            "order by (select name_status from status where id = o.status_id) desc, o.id desc;")
+            "order by FIELD((select id from status where id = o.status_id), 6, 3, 4), o.id desc;")
     List<Orders> findByConsolidationPoints_Employee_IdAccount(@Param("accountId") long accountId);
 
     @Query(nativeQuery = true, value ="SELECT DISTINCT YEAR(end_Order) AS year " +

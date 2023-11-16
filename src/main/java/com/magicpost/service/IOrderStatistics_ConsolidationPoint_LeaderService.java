@@ -11,4 +11,5 @@ public interface IOrderStatistics_ConsolidationPoint_LeaderService {
     List<OrderStatistics_ConsolidationPoint_Leader> getOrderStatisticsByYearAndAccountId_StatusComplete(int year, long idAccount);
     List<OrderStatistics_ConsolidationPoint_Leader> getOrderStatisticsByYearAndAccountId_StatusCancel(int year, long idAccount);
     List<OrderStatistics_ConsolidationPoint_Leader> getOrderStatisticsByYearAndAccountId_StatusShipping(int year, long idAccount);
+    List<OrderStatistics_ConsolidationPoint_Leader> getOrderStatisticsByYearAndAccountId_Received(int year, long idAccount);
 }
