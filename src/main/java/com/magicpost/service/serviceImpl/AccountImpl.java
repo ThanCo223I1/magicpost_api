@@ -5,10 +5,13 @@ import com.magicpost.model.Status;
 import com.magicpost.model.dto.AccountDTO;
 import com.magicpost.repo.IAccountRepo;
 import com.magicpost.service.IAccount;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,16 +20,14 @@ import java.util.Optional;
 
 @Service
 public class AccountImpl implements IAccount {
-   private final IAccountRepo iAccountRepo;
+    private final IAccountRepo iAccountRepo;
+
 
     public AccountImpl(IAccountRepo iAccountRepo) {
-        this.iAccountRepo=iAccountRepo;
+        this.iAccountRepo = iAccountRepo;
     }
 
-    @Override
-    public Account create(Account account) {
-        return iAccountRepo.save(account);
-    }
+
 
     @Override
     public List<Account> getAll() {
@@ -40,7 +41,7 @@ public class AccountImpl implements IAccount {
 
     @Override
     public void delete(Account account) {
-         iAccountRepo.delete(account);
+        iAccountRepo.delete(account);
     }
 
     @Override
@@ -65,16 +66,22 @@ public class AccountImpl implements IAccount {
         roles.add((GrantedAuthority) account.getRole());
         return new User(account.getUsername(), account.getPassword(), roles);
     }
-
     @Override
     public Account getAccountLogin(String username, String password) {
-        return iAccountRepo.getAccountByUsernameAndPassword(username , password);
+        Account account = iAccountRepo.getAccountByUsername(username);
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+         if (passwordEncoder.matches( password,account.getPassword())){
+             return account;
+         }
+         return null;
+
+
     }
 
     @Override
     public AccountDTO editStatus(long idAccount, long idStatus) {
         Account account = iAccountRepo.findById(idAccount).get();
-        Status status =new Status();
+        Status status = new Status();
         status.setId(idStatus);
         account.setStatus(status);
         account = iAccountRepo.save(account);

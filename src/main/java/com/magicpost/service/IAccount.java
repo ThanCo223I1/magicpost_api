@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IAccount extends UserDetailsService {
-    Account create(Account account);
     List<Account> getAll();
     Account edit(Account account);
     void delete(Account account);

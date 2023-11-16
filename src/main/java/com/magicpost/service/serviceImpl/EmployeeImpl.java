@@ -5,7 +5,6 @@ import com.magicpost.model.ConsolidationPoint;
 import com.magicpost.model.Employee;
 import com.magicpost.model.TransactionPoint;
 import com.magicpost.model.dto.CreateEmployeeRequest;
-import com.magicpost.model.dto.EmployeeDTO;
 import com.magicpost.repo.IEmployeeRepo;
 import com.magicpost.service.IAccount;
 import com.magicpost.service.IConsolidationPoint;
@@ -19,12 +18,15 @@ public class EmployeeImpl implements IEmployee {
     private final IAccount iAccount;
     private final ITransactionPoint iTransactionPoint;
     private final IConsolidationPoint iConsolidationPoint;
+    private final CreateAccount create;
 
-    public EmployeeImpl(IEmployeeRepo iEmployeeRepo, IAccount iAccount, ITransactionPoint iTransactionPoint, IConsolidationPoint iConsolidationPoint) {
+
+    public EmployeeImpl(IEmployeeRepo iEmployeeRepo, IAccount iAccount, ITransactionPoint iTransactionPoint, IConsolidationPoint iConsolidationPoint, CreateAccount create) {
         this.iEmployeeRepo = iEmployeeRepo;
         this.iAccount = iAccount;
         this.iTransactionPoint = iTransactionPoint;
         this.iConsolidationPoint = iConsolidationPoint;
+        this.create = create;
     }
 
     @Override
@@ -32,7 +34,7 @@ public class EmployeeImpl implements IEmployee {
         try {
             Account account = createEmployeeRequest.getAccount();
             Employee employee = createEmployeeRequest.getEmployee();
-            employee.setAccount(iAccount.create(account));
+            employee.setAccount(create.create(account));
             employee = iEmployeeRepo.save(employee);
             TransactionPoint transactionPoint = iTransactionPoint.findById(createEmployeeRequest.getId()).get();
             transactionPoint.getEmployee().add(employee);
@@ -49,7 +51,7 @@ public class EmployeeImpl implements IEmployee {
         try {
             Account account = createEmployeeRequest.getAccount();
             Employee employee = createEmployeeRequest.getEmployee();
-            employee.setAccount(iAccount.create(account));
+            employee.setAccount(create.create(account));
             employee = iEmployeeRepo.save(employee);
             ConsolidationPoint consolidationPoint = iConsolidationPoint.findById(createEmployeeRequest.getId());
             consolidationPoint.getEmployee().add(employee);

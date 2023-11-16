@@ -24,11 +24,14 @@ public class TransactionImpl implements ITransactionPoint {
     ITransactionPointRepo iTransactionPointRepo;
     IAccount iAccount;
     ILeader iLeader;
+    private final CreateAccount create;
 
-    public TransactionImpl(ITransactionPointRepo iTransactionPointRepo, IAccount iAccount, ILeader iLeader) {
+
+    public TransactionImpl(ITransactionPointRepo iTransactionPointRepo, IAccount iAccount, ILeader iLeader, CreateAccount create) {
         this.iTransactionPointRepo = iTransactionPointRepo;
         this.iAccount = iAccount;
         this.iLeader = iLeader;
+        this.create = create;
     }
 
     @Override
@@ -51,7 +54,7 @@ public class TransactionImpl implements ITransactionPoint {
         Account account = createTransactionRequest.getAccount();
         Leader leader = createTransactionRequest.getLeader();
         TransactionPoint transactionPoint = createTransactionRequest.getTransactionPoint();
-        iAccount.create(account);
+        create.create(account);
         leader = iLeader.create(account, leader);
         transactionPoint.setLeader(leader);
         transactionPoint.setConsolidationPoint(createTransactionRequest.getConsolidationPoint());
@@ -97,7 +100,7 @@ public class TransactionImpl implements ITransactionPoint {
         if (account.getPassword().equals(editLeaderPoint.getPassword())) {
             Account newAccount;
             try {
-               newAccount = iAccount.create(editLeaderPoint.getAccount());
+               newAccount = create.create(editLeaderPoint.getAccount());
                 Leader leader = editLeaderPoint.getLeader();
                 leader = iLeader.create(newAccount, leader);
                 TransactionPoint transactionPoint = iTransactionPointRepo.findById(editLeaderPoint.getId()).get();

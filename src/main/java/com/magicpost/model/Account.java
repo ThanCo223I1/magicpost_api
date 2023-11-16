@@ -4,6 +4,7 @@ import com.magicpost.model.dto.AccountDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -25,7 +26,9 @@ public class Account {
     private Role role;
     @ManyToOne
     private Status status;
-    public AccountDTO accountDTO(){
-        return new AccountDTO(this.id,this.username,this.role,this.status);
+    public AccountDTO accountDTO() {
+        return new AccountDTO(this.id, this.username, this.role, this.status);
     }
 }
+
+

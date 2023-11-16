@@ -1,8 +1,8 @@
 package com.magicpost.controller.Account;
 
 import com.magicpost.model.Account;
-import com.magicpost.model.dto.AccountDTO;
 import com.magicpost.service.IAccount;
+import com.magicpost.service.serviceImpl.CreateAccount;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,9 +13,11 @@ import java.util.List;
 @RequestMapping("/account")
 public class CrudAccount {
     IAccount account;
+   private final CreateAccount create;
 
-    public CrudAccount(IAccount account) {
+    public CrudAccount(IAccount account, CreateAccount create) {
         this.account = account;
+        this.create = create;
     }
     @GetMapping
     public ResponseEntity<List<Account>> getAll(){
@@ -23,6 +25,6 @@ public class CrudAccount {
     }
     @PostMapping("create")
     public ResponseEntity<Account> create(Account newAccount){
-        return ResponseEntity.ok(account.create(newAccount));
+        return ResponseEntity.ok(create.create(newAccount));
     }
 }

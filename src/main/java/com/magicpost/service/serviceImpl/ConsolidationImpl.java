@@ -3,7 +3,6 @@ package com.magicpost.service.serviceImpl;
 import com.magicpost.model.Account;
 import com.magicpost.model.ConsolidationPoint;
 import com.magicpost.model.Leader;
-import com.magicpost.model.TransactionPoint;
 import com.magicpost.model.dto.*;
 import com.magicpost.repo.IConsolidationPointRepo;
 import com.magicpost.service.IAccount;
@@ -19,11 +18,14 @@ public class ConsolidationImpl implements IConsolidationPoint {
     private final IConsolidationPointRepo iConsolidationPointRepo;
     private final IAccount iAccount;
     private final ILeader iLeader;
+    private final CreateAccount create;
 
-    public ConsolidationImpl(IConsolidationPointRepo iConsolidationPointRepo, IAccount iAccount, ILeader iLeader) {
+
+    public ConsolidationImpl(IConsolidationPointRepo iConsolidationPointRepo, IAccount iAccount, ILeader iLeader, CreateAccount create) {
         this.iConsolidationPointRepo = iConsolidationPointRepo;
         this.iAccount = iAccount;
         this.iLeader = iLeader;
+        this.create = create;
     }
 
     @Override
@@ -41,7 +43,7 @@ public class ConsolidationImpl implements IConsolidationPoint {
         Account account = createConsolidationRequest.getAccount();
         Leader leader = createConsolidationRequest.getLeader();
         ConsolidationPoint consolidationPoint = createConsolidationRequest.getConsolidationPoint();
-        iAccount.create(account);
+        create.create(account);
         iLeader.create(account, leader);
         consolidationPoint.setLeader(leader);
         iConsolidationPointRepo.save(consolidationPoint);
@@ -81,7 +83,7 @@ public class ConsolidationImpl implements IConsolidationPoint {
         if (account.getPassword().equals(editLeaderPoint.getPassword())) {
             Account newAccount;
             try {
-                newAccount = iAccount.create(editLeaderPoint.getAccount());
+                newAccount = create.create(editLeaderPoint.getAccount());
                 Leader leader = editLeaderPoint.getLeader();
                 leader = iLeader.create(newAccount, leader);
                 ConsolidationPoint consolidationPoint = iConsolidationPointRepo.findById(editLeaderPoint.getId()).get();
