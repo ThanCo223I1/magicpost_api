@@ -7,4 +7,6 @@ import java.util.List;
 public interface IOrderStatistics_AdminDTO {
     List<OrderStatistics_AdminDTO> getOrderStatisticsByYear_IdTransaction_IdStatus(long idTransaction, long idStatus, int year);
     List<OrderStatistics_AdminDTO> getOrderStatisticsByYear_IdConsolidation_IdStatus(long idConsolidation, long idStatus, int year);
+    List<OrderStatistics_AdminDTO> getOrderStatisticsEndOrderByYear_IdStatus(long idStatus, int year);
+    List<OrderStatistics_AdminDTO> getOrderStatisticsCreateOrderByYear_IdStatus(int year);
 }
