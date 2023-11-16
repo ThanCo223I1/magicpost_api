@@ -144,4 +144,105 @@ public class OrderStatistics_AdminDTOImpl implements IOrderStatistics_AdminDTO {
         }
         return orderStatisticsList;
     }
+
+    @Override
+    public List<OrderStatistics_AdminDTO> getOrderStatisticsEndOrderByYear_IdStatus(long idStatus, int year) {
+        String query = "SELECT " +
+                "    main.`Year`, " +
+                "    main.`Month`, " +
+                "    COALESCE(monthly_orders.TotalOrders_month, 0) AS TotalOrders_month " +
+                "FROM " +
+                "    ( " +
+                "        SELECT DISTINCT " +
+                "            YEAR(o.create_order) AS `Year`, " +
+                "            MONTH(o.create_order) AS `Month` " +
+                "        FROM " +
+                "            orders o " +
+                "         WHERE " +
+                "            o.status_id = :idStatus " +
+                "            AND YEAR(o.create_order) = :year " +
+                "        GROUP BY " +
+                "            `Year`, `Month` " +
+                "    ) AS main " +
+                "LEFT JOIN ( " +
+                "    SELECT " +
+                "        YEAR(o.create_order) AS `Year`, " +
+                "        MONTH(o.create_order) AS `Month`, " +
+                "        COUNT(DISTINCT o.id) AS TotalOrders_month " +
+                "    FROM " +
+                "        orders o " +
+                "    WHERE " +
+                "        o.status_id = :idStatus " +
+                "        AND YEAR(o.create_order) = :year " +
+                "    GROUP BY " +
+                "        `Year`, `Month` " +
+                ") AS monthly_orders ON main.`Year` = monthly_orders.`Year` AND main.`Month` = monthly_orders.`Month`";
+
+        Query nativeQuery = entityManager.createNativeQuery(query)
+                .setParameter("year", year)
+                .setParameter("idStatus", idStatus);
+
+        List<Object[]> results = nativeQuery.getResultList();
+        List<OrderStatistics_AdminDTO> orderStatisticsList = new ArrayList<>();
+
+        for (Object[] result : results) {
+            int resultYear = (int) result[0];
+            int resultMonth = (int) result[1];
+            BigInteger totalOrdersMonth = (BigInteger) result[2];
+
+            OrderStatistics_AdminDTO orderStatistics = new OrderStatistics_AdminDTO(resultYear, resultMonth, totalOrdersMonth);
+            orderStatisticsList.add(orderStatistics);
+        }
+        return orderStatisticsList;
+    }
+
+    @Override
+    public List<OrderStatistics_AdminDTO> getOrderStatisticsCreateOrderByYear_IdStatus(int year) {
+        String query = "SELECT " +
+                "    main.`Year`, " +
+                "    main.`Month`, " +
+                "    COALESCE(monthly_orders.TotalOrders_month, 0) AS TotalOrders_month " +
+                "FROM " +
+                "    ( " +
+                "        SELECT DISTINCT " +
+                "            YEAR(o.create_order) AS `Year`, " +
+                "            MONTH(o.create_order) AS `Month` " +
+                "        FROM " +
+                "            orders o " +
+                "         WHERE " +
+                "            o.status_id IN (5, 6) " +
+                "            AND YEAR(o.create_order) = :year " +
+                "        GROUP BY " +
+                "            `Year`, `Month` " +
+                "    ) AS main " +
+                "LEFT JOIN ( " +
+                "    SELECT " +
+                "        YEAR(o.create_order) AS `Year`, " +
+                "        MONTH(o.create_order) AS `Month`, " +
+                "        COUNT(DISTINCT o.id) AS TotalOrders_month " +
+                "    FROM " +
+                "        orders o " +
+                "    WHERE " +
+                "        o.status_id IN (5, 6) " +
+                "        AND YEAR(o.create_order) = :year " +
+                "    GROUP BY " +
+                "        `Year`, `Month` " +
+                ") AS monthly_orders ON main.`Year` = monthly_orders.`Year` AND main.`Month` = monthly_orders.`Month`";
+
+        Query nativeQuery = entityManager.createNativeQuery(query)
+                .setParameter("year", year);
+
+        List<Object[]> results = nativeQuery.getResultList();
+        List<OrderStatistics_AdminDTO> orderStatisticsList = new ArrayList<>();
+
+        for (Object[] result : results) {
+            int resultYear = (int) result[0];
+            int resultMonth = (int) result[1];
+            BigInteger totalOrdersMonth = (BigInteger) result[2];
+
+            OrderStatistics_AdminDTO orderStatistics = new OrderStatistics_AdminDTO(resultYear, resultMonth, totalOrdersMonth);
+            orderStatisticsList.add(orderStatistics);
+        }
+        return orderStatisticsList;
+    }
 }

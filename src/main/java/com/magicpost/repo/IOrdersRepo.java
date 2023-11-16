@@ -41,6 +41,22 @@ public interface IOrdersRepo extends JpaRepository<Orders, Long> {
         }
         return dtos;
     }
+
+    @Query(nativeQuery = true, value ="SELECT DISTINCT YEAR(create_Order) AS year " +
+            "FROM Orders")
+    List<Integer> findDistinctCreateOrderYears();
+
+    default List<DateEndOrder_YearDTO> dateCreateOrder_Year() {
+        List<Integer> years = findDistinctCreateOrderYears();
+        List<DateEndOrder_YearDTO> dtos = new ArrayList<>();
+        long id = 0L;
+        for (Integer year : years) {
+            if (year != null) {
+                dtos.add(new DateEndOrder_YearDTO(id++, year));}
+        }
+        return dtos;
+    }
+
     @Query("SELECT cp.name, MONTH(o.createOrder) AS month, YEAR(o.createOrder) AS year, COUNT(o.id) AS received_orders " +
             "FROM ConsolidationPoint cp " +
             "INNER JOIN orders_consolidation_points ocp ON cp.id = ocp.consolidationPoint.id " +

@@ -29,9 +29,19 @@ public class OrderStatisticsController {
         return iOrderStatisticsConsolidationPointLeaderService.getOrderStatisticsByYearAndAccountId_StatusCancel(year, idAccount);
     }
 
+    @GetMapping("/consolidationPoint_Leader_StatusShipping/{idAccount}/year/{year}")
+    public List<OrderStatistics_ConsolidationPoint_Leader> getOrderStatisticsByYearAndAccountId_StatusShipping(@PathVariable int year, @PathVariable long idAccount) {
+        return iOrderStatisticsConsolidationPointLeaderService.getOrderStatisticsByYearAndAccountId_StatusShipping(year, idAccount);
+    }
+
     @GetMapping("/dateEndOrder_Year")
     public List<DateEndOrder_YearDTO> dateEndOrder_Year() {
         return iOrderStatisticsConsolidationPointLeaderService.dateEndOrder_Year();
+    }
+
+    @GetMapping("/dateCreateOrder_Year")
+    public List<DateEndOrder_YearDTO> dateCreateOrder_Year() {
+        return iOrderStatisticsConsolidationPointLeaderService.dateCreateOrder_Year();
     }
 
     @GetMapping("/admin/transactionPoint/{idTransaction}/year/{year}/status/{idStatus}")
@@ -42,5 +52,15 @@ public class OrderStatisticsController {
     @GetMapping("/admin/consolidationPoint/{idConsolidation}/year/{year}/status/{idStatus}")
     public List<OrderStatistics_AdminDTO> getOrderStatisticsByYear_IdConsolidation_IdStatus(@PathVariable long idConsolidation, @PathVariable long idStatus, @PathVariable int year) {
         return iOrderStatisticsAdminDTO.getOrderStatisticsByYear_IdConsolidation_IdStatus(idConsolidation, idStatus, year);
+    }
+
+    @GetMapping("/admin/shipped/year/{year}/status/{idStatus}")
+    public List<OrderStatistics_AdminDTO> getOrderStatisticsEndOrderByYear_IdStatus(@PathVariable long idStatus, @PathVariable int year) {
+        return iOrderStatisticsAdminDTO.getOrderStatisticsEndOrderByYear_IdStatus(idStatus, year);
+    }
+
+    @GetMapping("/admin/inventory/year/{year}")
+    public List<OrderStatistics_AdminDTO> getOrderStatisticsCreateOrderByYear_IdStatus(@PathVariable int year) {
+        return iOrderStatisticsAdminDTO.getOrderStatisticsCreateOrderByYear_IdStatus(year);
     }
 }
