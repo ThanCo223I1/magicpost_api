@@ -12,6 +12,8 @@ import com.magicpost.service.IAccount;
 import com.magicpost.service.ILeader;
 import com.magicpost.service.ITransactionPoint;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -79,7 +81,9 @@ public class TransactionImpl implements ITransactionPoint {
     }
     public TransactionPointDTO save(EditDTO editDTO) {
         Account account = iAccount.findById(editDTO.getIdAccount()).get();
-        if (account.getPassword().equals(editDTO.getPassword())) {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//        if (account.getPassword().equals(editDTO.getPassword())) {
+        if (passwordEncoder.matches(editDTO.getPassword(), account.getPassword())) {
             TransactionPoint transactionPoint = iTransactionPointRepo.findById(editDTO.getId()).get();
             transactionPoint.setName(editDTO.getName());
             return iTransactionPointRepo.save(transactionPoint).transactionPointDTO();
@@ -97,7 +101,9 @@ public class TransactionImpl implements ITransactionPoint {
     @Override
     public Object saveLeader(EditLeaderPoint editLeaderPoint) {
         Account account = iAccount.findById(editLeaderPoint.getIdAccount()).get();
-        if (account.getPassword().equals(editLeaderPoint.getPassword())) {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//        if (account.getPassword().equals(editLeaderPoint.getPassword())) {
+        if (passwordEncoder.matches(editLeaderPoint.getPassword(), account.getPassword())) {
             Account newAccount;
             try {
                newAccount = create.create(editLeaderPoint.getAccount());

@@ -8,6 +8,8 @@ import com.magicpost.repo.IConsolidationPointRepo;
 import com.magicpost.service.IAccount;
 import com.magicpost.service.IConsolidationPoint;
 import com.magicpost.service.ILeader;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -80,7 +82,9 @@ public class ConsolidationImpl implements IConsolidationPoint {
     @Override
     public Object saveLeader(EditLeaderPoint editLeaderPoint) {
         Account account = iAccount.findById(editLeaderPoint.getIdAccount()).get();
-        if (account.getPassword().equals(editLeaderPoint.getPassword())) {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//        if (account.getPassword().equals(editLeaderPoint.getPassword())) {
+        if (passwordEncoder.matches(editLeaderPoint.getPassword(), account.getPassword())) {
             Account newAccount;
             try {
                 newAccount = create.create(editLeaderPoint.getAccount());
@@ -100,7 +104,9 @@ public class ConsolidationImpl implements IConsolidationPoint {
     @Override
     public ConsolidationPointDTO saveEdit(EditDTO editDTO) {
         Account account = iAccount.findById(editDTO.getIdAccount()).get();
-        if (account.getPassword().equals(editDTO.getPassword())) {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//        if (account.getPassword().equals(editDTO.getPassword())) {
+        if (passwordEncoder.matches(editDTO.getPassword(), account.getPassword())) {
             ConsolidationPoint consolidationPoint = iConsolidationPointRepo.findById(editDTO.getId()).get();
             consolidationPoint.setName(editDTO.getName());
             return iConsolidationPointRepo.save(consolidationPoint).consolidationPointDTOLeader();
